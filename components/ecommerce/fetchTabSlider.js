@@ -76,9 +76,9 @@ function FeatchTabSlider() {
                         <div className="banner-text">
                             <h2 className="mb-100">Buy parts of a product at low prices</h2>
 
-                            <Link legacyBehavior href="/products">
+                            <Link legacyBehavior href="/products-bulk">
                                 <a className="btn btn-xs">
-                                    Join group or Create group <i className="fi-rs-arrow-small-right"></i>
+                                    View All Bulk Products <i className="fi-rs-arrow-small-right"></i>
                                 </a>
                             </Link>
                         </div>

@@ -15,6 +15,7 @@ import {useRouter} from "next/router";
 import {loadStripe} from "@stripe/stripe-js";
 import axios from "axios";
 import {server} from "../server";
+import {mainServer} from "../mainServer";
 
 
 const Cart = ({
@@ -50,6 +51,40 @@ const Cart = ({
         };
         fetchDefaultAddress();
     }, []);
+
+    const [selectedCountry, setSelectedCountry] = useState('');
+
+    const handleCountryChange = (event) => {
+        setSelectedCountry(event.target.value);
+    };
+
+    const handleAddAddress = async (event) => {
+        event.preventDefault();
+
+        const newAddress = {
+            country: selectedCountry,
+            address: event.target.elements.address.value,
+            street: event.target.elements.street.value,
+            city: event.target.elements.city.value,
+            state: event.target.elements.state.value,
+            zip_code: event.target.elements.zip_code.value
+        };
+
+        try {
+            const response = await axios.post(`${mainServer}/address/${userInfo.user.id}`, newAddress);
+
+            console.log(response.data);
+
+            // Close the modal
+            closeModal();
+
+            // Refresh the address list
+            refreshAddresses();
+
+        } catch (error) {
+            console.error('Failed to add address:', error);
+        }
+    };
 
     const [useShippingForBilling, setUseShippingForBilling] = useState(false);
 
@@ -113,20 +148,27 @@ const Cart = ({
                                         </address>
                                     </div>
                                 ) : (
-                                    <form method="post">
-
+                                    <form className="p-4" onSubmit={handleAddAddress}>
                                         <div className="form-group">
                                             <div className="custom_select">
-                                                <select className="form-control select-active">
+                                                <select className="form-control select-active" value={selectedCountry}
+                                                        onChange={handleCountryChange}>
                                                     <option value="">
-                                                        Select an option...
+                                                        Select Country
                                                     </option>
                                                     <option value="US">
                                                         USA (US)
                                                     </option>
-
                                                 </select>
                                             </div>
+                                        </div>
+                                        <div className="form-group">
+                                            <input
+                                                type="text"
+                                                name="country"
+                                                value={selectedCountry}
+                                                placeholder="Country *"
+                                            />
                                         </div>
                                         <div className="form-group">
                                             <input
@@ -136,12 +178,13 @@ const Cart = ({
                                                 placeholder="Address *"
                                             />
                                         </div>
+
                                         <div className="form-group">
                                             <input
-                                                type="text"
-                                                name="billing_address2"
                                                 required=""
-                                                placeholder="Address line2"
+                                                type="text"
+                                                name="street"
+                                                placeholder="Street *"
                                             />
                                         </div>
                                         <div className="form-group">
@@ -164,9 +207,14 @@ const Cart = ({
                                             <input
                                                 required=""
                                                 type="text"
-                                                name="zipcode"
+                                                name="zip_code"
                                                 placeholder="Postcode / ZIP *"
                                             />
+                                        </div>
+
+                                        <div className="col-lg-12 col-md-12">
+                                            <button className="submit submit-auto-width" type="submit">Add Address
+                                            </button>
                                         </div>
 
                                     </form>
@@ -216,7 +264,7 @@ const Cart = ({
                                         <>
                                             <div className="form-group">
                                                 <div className="custom_select">
-                                                    <select className="form-control select-active">
+                                                <select className="form-control select-active">
                                                         <option value="">Select an option...</option>
                                                         <option value="US">USA (US)</option>
                                                     </select>

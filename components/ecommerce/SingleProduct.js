@@ -69,6 +69,7 @@ const SingleProduct = ({
                                             className="default-img"
                                             src={`${assetServer}/images/products/${product.image}`}
                                             alt=""
+                                            style={{width: '300px', height: '200px'}}
                                         />
                                         {/*<img*/}
                                         {/*    className="hover-img"*/}
@@ -79,7 +80,7 @@ const SingleProduct = ({
                                 </Link>
                             </div>
                             <div className="product-action-1">
-                                <a
+                            <a
                                     aria-label="Quick view"
                                     className="action-btn hover-up"
                                     data-bs-toggle="modal"

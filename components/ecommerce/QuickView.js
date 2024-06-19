@@ -29,9 +29,19 @@ const QuickView = ({ quickView, closeQuickView }) => {
 
     return (
         <>
-            <Modal open={quickView ? true : false} onClose={closeQuickView}>
+            <Modal
+                open={quickView ? true : false}
+                onClose={closeQuickView}
+                styles={{
+                    modal: {
+                        width: '80%', // adjust this value to your needs
+                        height: '70%', // adjust this value to your needs
+                        marginTop: '70px', // added top margin
+                    },
+                }}
+            >
                 {quickView && (
-                    <div className="quick-view">
+                    <div className="quick-view ">
                         <ProductDetails product={quickView} quickView={quickView} />
                     </div>
                 )}

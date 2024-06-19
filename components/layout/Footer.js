@@ -171,7 +171,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </section>
-                <section className="section-padding footer-mid">
+                <section className="section-padding footer-mid" style={{backgroundColor: '#f4f6fa'}}>
                     <div className="container pt-15 pb-20">
                         <div className="row">
                             <div className="col">
@@ -367,7 +367,7 @@ const Footer = () => {
                 </section>
                 <div
                     className="container pb-30  wow animate__animated animate__fadeInUp"
-                    data-wow-delay="0"
+                    data-wow-delay="0" style={{backgroundColor: '#f4f6fa'}}
                 >
                     <div className="row align-items-center">
                         <div className="col-12 mb-30">
