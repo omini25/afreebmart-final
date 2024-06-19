@@ -10,6 +10,7 @@ import {Modal} from "react-responsive-modal";
 import AddAddress from "../components/ecommerce/AddAddress";
 import CreateGroup from "../components/ecommerce/CreateGroup";
 import JoinGroup from "../components/ecommerce/JoinGroup";
+import EditAddress from "../components/ecommerce/EditAddress";
 
 function Account() {
     const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -210,8 +211,6 @@ function Account() {
         }
     };
 
-    console.log(groupDetails)
-
     return (
         <>
             <Layout parent="Home" sub="Pages" subChild="Account">
@@ -273,20 +272,20 @@ function Account() {
                                                         <p>
                                                             From your account dashboard. you can easily check &amp; view your
                                                             <span
-                                                            style={{color: 'blue', cursor: 'pointer'}}
+                                                            style={{color: '#69e265', cursor: 'pointer'}}
                                                             onClick={() => handleOnClick(2)}
                                                             >
-                                                                recent orders
+                                                                 recent orders
                                                             </span>,
                                                             <br/>
-                                                            manage your
+                                                             manage your
                                                             <span
-                                                                style={{color: 'blue', cursor: 'pointer'}}
+                                                                style={{color: '#69e265', cursor: 'pointer'}}
                                                                 onClick={() => handleOnClick(4)}
                                                             >
                                                                 addresses
                                                             </span> and <span
-                                                                style={{color: 'blue', cursor: 'pointer'}}
+                                                                style={{color: '#69e265', cursor: 'pointer'}}
                                                                 onClick={() => handleOnClick(5)}
                                                             >
                                                             edit your password and account details.
@@ -438,48 +437,13 @@ function Account() {
                                                                             <address className="mt-20">
                                                                                 {addr.street}, <br />{addr.city}, <br />{addr.state}, <br />{addr.country}, <br />{addr.zip_code}
                                                                             </address>
-                                                                            <button className="btn btn-fill-out btn-block mt-20" onClick={() => openModal(addr)}>Edit</button>
+                                                                            {/*<button className="btn btn-fill-out btn-block mt-20" onClick={() => openModal(addr)}>Edit</button>*/}
+
+                                                                            <EditAddress address={addr} />
                                                                         </div>
                                                                     ))}
                                                                 </div>
                                                             </div>
-
-                                                            <Modal
-                                                                isOpen={modalIsOpen}
-                                                                onRequestClose={closeModal}
-                                                                contentLabel="Edit Address"
-                                                            >
-                                                                <h2>Edit Address</h2>
-                                                                <form>
-                                                                    <label>
-                                                                        Street:
-                                                                        <input type="text"
-                                                                               defaultValue={currentAddress ? currentAddress.street : ''}/>
-                                                                    </label>
-                                                                    <label>
-                                                                        City:
-                                                                        <input type="text"
-                                                                               defaultValue={currentAddress ? currentAddress.city : ''}/>
-                                                                    </label>
-                                                                    <label>
-                                                                        State:
-                                                                        <input type="text"
-                                                                               defaultValue={currentAddress ? currentAddress.state : ''}/>
-                                                                    </label>
-                                                                    <label>
-                                                                        Country:
-                                                                        <input type="text"
-                                                                               defaultValue={currentAddress ? currentAddress.country : ''}/>
-                                                                    </label>
-                                                                    <label>
-                                                                        Zip Code:
-                                                                        <input type="text"
-                                                                               defaultValue={currentAddress ? currentAddress.zip_code : ''}/>
-                                                                    </label>
-                                                                    <button type="submit">Save</button>
-                                                                </form>
-                                                                <button onClick={closeModal}>Close</button>
-                                                            </Modal>
                                                         </div>
                                                     </div>
                                                 </div>

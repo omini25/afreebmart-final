@@ -3,37 +3,44 @@ import SwiperCore, { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { fetchByCatagory } from "../../redux/action/product";
 import SingleProduct from "./../ecommerce/SingleProduct";
+import axios from "axios";
+import {server} from "../../config";
 
 SwiperCore.use([Navigation]);
 
-const RelatedSlider = () => {
+const RelatedSlider = ({ vendorId }) => {
     const [related, setRelated] = useState([]);
+    const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetchProducts();
-    }, []);
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(`${server}/products`);
+                const vendorProducts = response.data.products.filter(product => product.vendor_id === vendorId);
+                setProduct(vendorProducts);
+            } catch (error) {
+                console.error('Failed to fetch product:', error);
+            }
+        };
 
-    const fetchProducts = async () => {
-        // With Category
-        const allProducts = await fetchByCatagory("/static/product.json");
-        setRelated(allProducts);
-    };
+        fetchProduct();
+    }, [vendorId]);
 
     return (
         <>
             <Swiper
                 slidesPerView={4}
                 spaceBetween={30}
-                
+
                 navigation={{
                     prevEl: ".custom_prev_n",
                     nextEl: ".custom_next_n",
                 }}
                 className="custom-class"
             >
-                {related.map((product, i) => (
+                {product && product.map((productItem, i) => (
                     <SwiperSlide key={i}>
-                        <SingleProduct product={product} />
+                        <SingleProduct product={productItem} />
                     </SwiperSlide>
                 ))}
             </Swiper>

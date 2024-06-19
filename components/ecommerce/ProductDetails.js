@@ -56,9 +56,7 @@ const ProductDetails = ({
                                 <div className="row mb-50  mt-30">
                                     <div className="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                                         <div className="detail-gallery">
-                                            <span className="zoom-icon">
-                                                <i className="fi-rs-search"></i>
-                                            </span>
+
 
                                             <div className="product-image-slider">
                                                 <ThumbSlider product={product} />
@@ -90,35 +88,7 @@ const ProductDetails = ({
                                             <div className="mb-30">
                                                 <p className="font-lg">{product.description}</p>
                                             </div>
-                                            {/*<div className="attr-detail attr-color mb-15">*/}
-                                            {/*    <strong className="mr-10">Color</strong>*/}
-                                            {/*    <ul className="list-filter color-filter">*/}
-                                            {/*        {product.variations.map((clr, i) => (*/}
-                                            {/*            <li key={i}>*/}
-                                            {/*                <a href="#">*/}
-                                            {/*                    <span className={`product-color-${clr}`}></span>*/}
-                                            {/*                </a>*/}
-                                            {/*            </li>*/}
-                                            {/*        ))}*/}
-                                            {/*    </ul>*/}
-                                            {/*</div>*/}
-                                            {/*<div className="attr-detail attr-size">*/}
-                                            {/*    <strong className="mr-10">Size</strong>*/}
-                                            {/*    <ul className="list-filter size-filter font-small">*/}
-                                            {/*        <li className="active">*/}
-                                            {/*            <a>M</a>*/}
-                                            {/*        </li>*/}
-                                            {/*        <li>*/}
-                                            {/*            <a>L</a>*/}
-                                            {/*        </li>*/}
-                                            {/*        <li>*/}
-                                            {/*            <a>XL</a>*/}
-                                            {/*        </li>*/}
-                                            {/*        <li>*/}
-                                            {/*            <a>XXL</a>*/}
-                                            {/*        </li>*/}
-                                            {/*    </ul>*/}
-                                            {/*</div>*/}
+
                                             <div className="bt-1 border-color-1 mt-30 mb-30"></div>
                                             <div className="detail-extralink">
 
@@ -162,9 +132,6 @@ const ProductDetails = ({
                                                        onClick={(e) => handleWishlist(product)}>
                                                         <i className="fi-rs-heart"></i>
                                                     </a>
-                                                    {/*<a aria-label="Compare" className="action-btn hover-up" onClick={(e) => handleCompare(product)}>*/}
-                                                    {/*    <i className="fi-rs-shuffle"></i>*/}
-                                                    {/*</a>*/}
                                                 </div>
                                             </div>
                                             <ul className="product-meta font-xs color-grey mt-50">
@@ -215,21 +182,21 @@ const ProductDetails = ({
                                     </div>
                                 </div>
 
-                                {/*{quickView ? null : (*/}
-                                {/*    <>*/}
-                                {/*        <ProductTab />*/}
-                                {/*        <div className="row mt-60">*/}
-                                {/*            <div className="col-12">*/}
-                                {/*                <h3 className="section-title style-1 mb-30">Related products</h3>*/}
-                                {/*            </div>*/}
-                                {/*            <div className="col-12">*/}
-                                {/*                <div className="row related-products position-relative">*/}
-                                {/*                    <RelatedSlider />*/}
-                                {/*                </div>*/}
-                                {/*            </div>*/}
-                                {/*        </div>*/}
-                                {/*    </>*/}
-                                {/*)}*/}
+                                {quickView ? null : (
+                                    <>
+                                        <ProductTab product={product} />
+                                        <div className="row mt-60">
+                                            <div className="col-12">
+                                                <h3 className="section-title style-1 mb-30">Related products</h3>
+                                            </div>
+                                            <div className="col-12">
+                                                <div className="row related-products position-relative">
+                                                    <RelatedSlider vendorId={product.vendor_id}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         </div>
                     </div>

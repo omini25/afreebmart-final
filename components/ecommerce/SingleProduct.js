@@ -18,25 +18,6 @@ const SingleProduct = ({
                            addToWishlist,
                            openQuickView,
                        }) => {
-    // const [products, setProducts] = useState([]);
-
-
-
-    // useEffect(() => {
-    //     axios.get(`${server}/products`)
-    //         .then(response => {
-    //             // console.log(response.data);
-    //             setProducts(response.data);
-    //         })
-    //         .catch(error => {
-    //             console.error('There was an error!', error);
-    //         });
-    // }, []);
-    
-
-
-
-
 
     const handleCart = (product) => {
         addToCart(product);

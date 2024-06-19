@@ -11,7 +11,10 @@ const Intro1 = () => {
             <Swiper
                 slidesPerView={1}
                 spaceBetween={0}
-                
+                effect={"fade"}
+                fadeEffect={{
+                    crossFade: true,
+                }}
                 pagination={true}
                 navigation={{
                     prevEl: ".custom_prev_i1",
@@ -21,7 +24,7 @@ const Intro1 = () => {
             >
                 <SwiperSlide>
                     <div
-                        className="single-hero-slider single-animation-wrap"
+                        className="single-hero-slider rectangle single-animation-wrap"
                         style={{
                             backgroundImage: "url(assets/wb.png)",
                             position: 'relative' // Ensure the parent is positioned
@@ -34,7 +37,7 @@ const Intro1 = () => {
                                 left: 0,
                                 height: '100%',
                                 width: '100%',
-                                backgroundColor: 'rgba(0, 0, 0, 0.5)' // Change the color and opacity as needed
+                                backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
                             }}
                         />
                         <div className="slider-content">
@@ -46,7 +49,7 @@ const Intro1 = () => {
                             <p className="mb-65 text-white">
                                 Better ingredients, better food, and beverages, at low prices
                             </p>
-                            <div className="form-subcriber d-flex">
+                            <div className="form-subcriber d-flex justify-content-center">
                                 <Link to="/products" href={`/products`} className="btn">
                                     Shop Now
                                 </Link>
@@ -56,7 +59,7 @@ const Intro1 = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <div
-                        className="single-hero-slider single-animation-wrap"
+                        className="single-hero-slider rectangle single-animation-wrap"
                         style={{
                             backgroundImage:
                                 "url(assets/afreebmart-slide2.png)",
@@ -70,7 +73,7 @@ const Intro1 = () => {
                                 left: 0,
                                 height: '100%',
                                 width: '100%',
-                                backgroundColor: 'rgba(0, 0, 0, 0.5)' // Change the color and opacity as needed
+                                backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
                             }}
                         />
                         <div className="slider-content">
@@ -82,7 +85,7 @@ const Intro1 = () => {
                             <p className="mb-65 text-white">
                                 Enjoy amazing deals on your favorite products
                             </p>
-                            <div className="form-subcriber d-flex">
+                            <div className="form-subcriber d-flex justify-content-center">
                                 <Link to="/products" href={`/products`} className="btn">
                                     Shop Now
                                 </Link>
@@ -92,7 +95,7 @@ const Intro1 = () => {
                 </SwiperSlide>
                 <SwiperSlide>
                     <div
-                        className="single-hero-slider single-animation-wrap"
+                        className="single-hero-slider rectangle single-animation-wrap"
                         style={{
                             backgroundImage:
                                 "url(assets/afreebmart-slide3.png)",
@@ -106,7 +109,7 @@ const Intro1 = () => {
                                 left: 0,
                                 height: '100%',
                                 width: '100%',
-                                backgroundColor: 'rgba(0, 0, 0, 0.5)' // Change the color and opacity as needed
+                                backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
                             }}
                         />
                         <div className="slider-content">
@@ -118,7 +121,7 @@ const Intro1 = () => {
                             <p className="mb-65 text-white">
                                 Save up to 50% off on your first order
                             </p>
-                            <div className="form-subcriber d-flex">
+                            <div className="form-subcriber d-flex justify-content-center">
                                 <Link to="/products" href={`/products`} className="btn">
                                         Shop Now
                                 </Link>
