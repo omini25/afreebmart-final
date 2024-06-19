@@ -1,1 +1,1 @@
-export const mainServer = "http://localhost:8000/api";
+export const mainServer = "https://afreebmart.com/api";

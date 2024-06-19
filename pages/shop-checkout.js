@@ -40,8 +40,9 @@ const Cart = ({
     useEffect(() => {
         const fetchDefaultAddress = async () => {
             try {
+                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
                 const response = await axios.get(`${server}/address/${userInfo.user.id}`);
-                const defaultAddr = response.data.find(addr => addr.is_default === 1);
+                const defaultAddr = response.data.address.find(addr => addr.is_default === 1);
                 setDefaultAddress(defaultAddr);
             } catch (error) {
                 console.error('Failed to fetch address:', error);
@@ -50,7 +51,7 @@ const Cart = ({
         fetchDefaultAddress();
     }, []);
 
-    console.log('Default Address:', defaultAddress);
+    const [useShippingForBilling, setUseShippingForBilling] = useState(false);
 
     useEffect(() => {
         const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -66,7 +67,7 @@ const Cart = ({
     return (
         <>
             <Layout parent="Home" sub="Shop" subChild="Checkout">
-                <section className="mt-50 mb-50">
+                <section className="mt-50 mb-50 " style={{paddingLeft: '50px', paddingRight: '50px'}}>
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-8 mb-40">
@@ -103,7 +104,7 @@ const Cart = ({
                                     </div>
                                 </div>
                                 <div className="mb-25">
-                                    <h4>Billing Details</h4>
+                                    <h4>Shipping Details</h4>
                                 </div>
                                 {defaultAddress ? (
                                     <div>
@@ -170,6 +171,78 @@ const Cart = ({
 
                                     </form>
                                 )}
+
+                                <div className="mb-25 mt-30">
+                                    <h4>Billing Details</h4>
+                                </div>
+                                {defaultAddress ? (
+                                    <div>
+                                        {/*<address>*/}
+                                        {/*    {defaultAddress.street}, {defaultAddress.city}, {defaultAddress.state}, {defaultAddress.country}, {defaultAddress.zip_code}*/}
+                                        {/*</address>*/}
+                                        <div className="chek-form">
+                                            <div className="custome-checkbox pb-15">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    name="checkbox"
+                                                    id="differentaddress"
+                                                    onChange={() => setUseShippingForBilling(!useShippingForBilling)}
+                                                />
+                                                <label
+                                                    className="form-check-label label_info"
+                                                    data-bs-toggle="collapse"
+                                                    data-target="#collapseAddress"
+                                                    href="#collapseAddress"
+                                                    aria-controls="collapseAddress"
+                                                    htmlFor="differentaddress"
+                                                >
+                                                        <span>
+                                                            Use Shipping Address for Billing
+                                                        </span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {/*<div>*/}
+                                        {/*    <input type="checkbox" id="sameAsShipping" name="sameAsShipping"*/}
+                                        {/*           onChange={() => setUseShippingForBilling(!useShippingForBilling)}/>*/}
+                                        {/*    <label htmlFor="sameAsShipping">Use Shipping Address for Billing</label>*/}
+                                        {/*</div>*/}
+                                    </div>
+                                ) : null}
+
+                                <form method="post">
+                                    {!useShippingForBilling && (
+                                        <>
+                                            <div className="form-group">
+                                                <div className="custom_select">
+                                                    <select className="form-control select-active">
+                                                        <option value="">Select an option...</option>
+                                                        <option value="US">USA (US)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div className="form-group">
+                                                <input type="text" name="address" required="" placeholder="Address *"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <input type="text" name="billing_address2" required=""
+                                                       placeholder="Address line2"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <input required="" type="text" name="city" placeholder="City / Town *"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <input required="" type="text" name="state"
+                                                       placeholder="State / County *"/>
+                                            </div>
+                                            <div className="form-group">
+                                                <input required="" type="text" name="zipcode"
+                                                       placeholder="Postcode / ZIP *"/>
+                                            </div>
+                                        </>
+                                    )}
+                                </form>
                             </div>
                             <div className="col-lg-5">
                                 <div className="border p-40 cart-totals ml-30 mb-50">
@@ -247,9 +320,11 @@ const Cart = ({
                                     <div className="bt-1 border-color-1 mt-30 mb-30"></div>
                                     <div className="payment_method">
                                         <div className="mb-25">
-                                            <h5>Payment</h5>
+                                            <h5>Shipping: $5.99</h5>
                                         </div>
-
+                                        <div className="mb-25">
+                                            <h5>Total Payment: ${(price() + 5.99).toFixed(2)}</h5>
+                                        </div>
                                     </div>
                                     <button
                                         className="btn btn-fill-out btn-block mt-30"
@@ -264,6 +339,9 @@ const Cart = ({
                                                     quantity: item.quantity
                                                 }));
 
+                                                // Get user info from local storage
+                                                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
                                                 // Get Stripe.js instance
                                                 const stripe = await stripePromise;
 
@@ -274,27 +352,20 @@ const Cart = ({
                                                         'Content-Type': 'application/json'
                                                     },
                                                     body: JSON.stringify({
-                                                        productDetails: productDetails
+                                                        productDetails: productDetails,
+                                                        user_id: userInfo.user.id
                                                     })
                                                 });
 
                                                 const session = await response.json();
 
-                                                // When the customer clicks on the button, redirect them to check out.
+                                                // Redirect to Stripe Checkout
                                                 const result = await stripe.redirectToCheckout({
                                                     sessionId: session.id,
                                                 });
 
-                                                // If `redirectToCheckout` fails due to a browser or network
-                                                // error, display the localized error message to your customer
-                                                // using `result.error.message`.
                                                 if (result.error) {
-                                                    alert(result.error.message);
-                                                } else {
-                                                    // If payment is successful, redirect to the order successful page
-                                                    // and clear the cart
-                                                    await router.push(`/order-successful?order_id=${session.id}`);
-                                                    clearCart();
+                                                    console.error('Stripe error:', result.error.message);
                                                 }
                                             } catch (error) {
                                                 console.error('An error occurred:', error);

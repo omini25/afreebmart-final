@@ -17,7 +17,7 @@ import axios from "axios";
 import {server} from "../server";
 
 const Products = ({ products, productFilters, fetchProduct }) => {
-    console.log(products);
+    const [showSection, setShowSection] = useState(false);
 
     const [data, setData] = useState([]);
 
@@ -99,24 +99,56 @@ const Products = ({ products, productFilters, fetchProduct }) => {
     return (
         <>
             <Layout noBreadcrumb="d-none">
-            {/*<Breadcrumb2/>*/}
+                {/*<Breadcrumb2/>*/}
+                <div className="col-xl-10 col-lg-12 m-auto">
+                    <button onClick={() => setShowSection(!showSection)}>
+                        <i className="down-icon">What is Bulk Product</i>
+                    </button>
+                    {showSection && (
+                        <section className="row align-items-end mb-50">
+                            <div className="col-lg-4 mb-lg-0 mb-md-5 mb-sm-5">
+                                <h4 className="mb-20 text-brand">How can help you ?</h4>
+                                <h1 className="mb-30">Let us know how we can help you</h1>
+                                <p className="mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                    elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus
+                                    leo.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
+                                    luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                            </div>
+                            <div className="col-lg-8">
+                                <div className="row">
+                                    <div className="col-lg-6 mb-4">
+                                        <h5 className="mb-20">01. Visit Feedback</h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                    </div>
+                                    <div className="col-lg-6 mb-4">
+                                        <h5 className="mb-20">02. Employer Services</h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                    </div>
+                                    <div className="col-lg-6 mb-lg-0 mb-4">
+                                        <h5 className="mb-20 text-brand">03. Billing Inquiries</h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                    </div>
+                                    <div className="col-lg-6">
+                                        <h5 className="mb-20">04.General Inquiries</h5>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    )}
+                </div>
                 <section className="mt-50 mb-50">
                     <div className="container mb-30">
                         <div className="row flex-row-reverse">
                             <div className="col-lg-4-5">
                                 <div className="shop-product-fillter">
 
-                                    {/*<div className="sort-by-product-area">*/}
-                                    {/*    <div className="sort-by-cover mr-10">*/}
-                                    {/*        <ShowSelect*/}
-                                    {/*            selectChange={selectChange}*/}
-                                    {/*            showLimit={showLimit}*/}
-                                    {/*        />*/}
-                                    {/*    </div>*/}
-                                    {/*    <div className="sort-by-cover">*/}
-                                    {/*        <SortSelect/>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
+
                                 </div>
                                 <div className="row product-grid">
                                     {data && data.length === 0 && (
@@ -157,8 +189,6 @@ const Products = ({ products, productFilters, fetchProduct }) => {
                                 </div>
 
 
-
-
                                 <div className="banner-img wow fadeIn mb-lg-0 animated d-lg-block d-none">
                                     <img
                                         src="/assets/imgs/banner/banner-11.png"
@@ -167,12 +197,12 @@ const Products = ({ products, productFilters, fetchProduct }) => {
                                     <div className="banner-text">
                                         <span>Oganic</span>
                                         <h4>
-                                            Save 17% <br />
+                                            Save 17% <br/>
                                             on{" "}
                                             <span className="text-brand">
                                                 Oganic
                                             </span>
-                                            <br />
+                                            <br/>
                                             Juice
                                         </h4>
                                     </div>
@@ -184,7 +214,7 @@ const Products = ({ products, productFilters, fetchProduct }) => {
                 {/* <WishlistModal /> */}
                 {/* <CompareModal /> */}
                 {/* <CartSidebar /> */}
-                <QuickView />
+                <QuickView/>
                 {/* <div className="container">
                     <div className="row">
                         <div className="col-xl-6">

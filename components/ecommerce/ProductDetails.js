@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import {
@@ -11,6 +11,8 @@ import { addToWishlist } from "../../redux/action/wishlistAction";
 import ProductTab from "../elements/ProductTab";
 import RelatedSlider from "../sliders/Related";
 import ThumbSlider from "../sliders/Thumb";
+import Link from "next/link";
+import Router from 'next/router';
 
 const ProductDetails = ({
     product,
@@ -122,11 +124,13 @@ const ProductDetails = ({
 
                                                 {product.group !== "1" && (
                                                     <div className="detail-qty border radius">
-                                                        <a onClick={(e) => (!inCart ? setQuantity(quantity > 1 ? quantity - 1 : 1) : decreaseQuantity(product?.id))} className="qty-down">
+                                                        <a onClick={(e) => (!inCart ? setQuantity(quantity > 1 ? quantity - 1 : 1) : decreaseQuantity(product?.id))}
+                                                           className="qty-down">
                                                             <i className="fi-rs-angle-small-down"></i>
                                                         </a>
                                                         <span className="qty-val">{inCart?.quantity || quantity}</span>
-                                                        <a onClick={() => (!inCart ? setQuantity(quantity + 1) : increaseQuantity(product.id))} className="qty-up">
+                                                        <a onClick={() => (!inCart ? setQuantity(quantity + 1) : increaseQuantity(product.id))}
+                                                           className="qty-up">
                                                             <i className="fi-rs-angle-small-up"></i>
                                                         </a>
                                                     </div>
@@ -135,7 +139,10 @@ const ProductDetails = ({
 
                                                 <div className="product-extra-link2">
                                                     {product.group === "1" ? (
-                                                        <button className="button button-add-to-group">
+                                                        <button
+                                                            className="button button-add-to-group"
+                                                            onClick={() => Router.push('/page-account')}
+                                                        >
                                                             Join or Create Group
                                                         </button>
                                                     ) : (
@@ -151,7 +158,8 @@ const ProductDetails = ({
                                                             Add to cart
                                                         </button>
                                                     )}
-                                                    <a aria-label="Add To Wishlist" className="action-btn hover-up" onClick={(e) => handleWishlist(product)}>
+                                                    <a aria-label="Add To Wishlist" className="action-btn hover-up"
+                                                       onClick={(e) => handleWishlist(product)}>
                                                         <i className="fi-rs-heart"></i>
                                                     </a>
                                                     {/*<a aria-label="Compare" className="action-btn hover-up" onClick={(e) => handleCompare(product)}>*/}
@@ -172,9 +180,37 @@ const ProductDetails = ({
                                                 </li>
                                                 <li>
                                                     Availability:
-                                                    <span className="in-stock text-success ml-5">{product.quantity} Items In Stock</span>
+                                                    <span
+                                                        className="in-stock text-success ml-5">{product.quantity} Items In Stock</span>
                                                 </li>
                                             </ul>
+                                            <div className="mobile-social-icon">
+                                                <h5 className="mb-15 pt-10 text-grey-4">Share Product</h5>
+                                                <Link legacyBehavior href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}&quote=${encodeURIComponent(product.product_name)}`} target="_blank">
+                                                    <a>
+                                                        <img
+                                                            src="/assets/imgs/theme/icons/icon-facebook.svg"
+                                                            alt=""
+                                                        />
+                                                    </a>
+                                                </Link>
+                                                <Link legacyBehavior href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(product.product_name)}`} target="_blank">
+                                                    <a>
+                                                        <img
+                                                            src="/assets/imgs/theme/icons/icon-twitter.svg"
+                                                            alt=""
+                                                        />
+                                                    </a>
+                                                </Link>
+                                                <Link legacyBehavior href={`http://instagram.com/share?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(product.product_name)}`} target="_blank">
+                                                    <a>
+                                                        <img
+                                                            src="/assets/imgs/theme/icons/icon-instagram.svg"
+                                                            alt=""
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

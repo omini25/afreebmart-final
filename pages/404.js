@@ -34,7 +34,7 @@ function Custom404() {
                                             <span> Homepage</span>
                                         </a></Link>
                                         or{" "}
-                                        <Link legacyBehavior href="/page-contact"><a>
+                                        <Link legacyBehavior href="/pages/bulks"><a>
                                             <span>Contact us</span>
                                         </a></Link>
                                         about the problem

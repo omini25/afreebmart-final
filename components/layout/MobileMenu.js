@@ -1,11 +1,17 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import useClickOutside from "../../util/outsideClick";
 import { useRouter } from "next/router";
 
 
 const MobileMenu = ({ isToggled, toggleClick }) => {
     const router = useRouter();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    useEffect(() => {
+        const loggedIn = localStorage.getItem('isLoggedIn');
+        setIsLoggedIn(loggedIn === 'true');
+    }, []);
 
     const [isActive, setIsActive] = useState({
         status: false,
@@ -63,6 +69,20 @@ const MobileMenu = ({ isToggled, toggleClick }) => {
             status: false,
         });
     });
+
+
+    const logout = () => {
+        // Clear user data from local storage
+        localStorage.removeItem('isLoggedIn');
+
+        // Clear user data from state (if any)
+        setIsLoggedIn(false);
+
+        // Redirect to home page
+        router.push('/');
+    };
+
+
     return (
         <>
             <div
@@ -307,9 +327,32 @@ const MobileMenu = ({ isToggled, toggleClick }) => {
                         <div className="mobile-header-info-wrap mobile-header-border">
 
                             <div className="single-mobile-header-info">
-                                <Link legacyBehavior href="/page-login">
-                                <a>Log In / Sign Up </a>
-                                </Link>
+                                {isLoggedIn ? (
+                                    <ul>
+                                        <li>
+                                            <Link legacyBehavior  href="/account">
+                                                <a>Account</a>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link legacyBehavior href="/orders">
+                                                <a>Orders</a>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link legacyBehavior href="/profile">
+                                                <a>Profile</a>
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <a onClick={logout}>Log Out</a>
+                                        </li>
+                                    </ul>
+                                ) : (
+                                    <Link legacyBehavior href="/page-login">
+                                        <a>Log In / Sign Up</a>
+                                    </Link>
+                                )}
                             </div>
 
                         </div>

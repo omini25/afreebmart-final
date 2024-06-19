@@ -48,7 +48,7 @@ function Terms() {
                                             <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 30 days notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
                                             <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
                                             <h4>Contact Us</h4>
-                                            <p>If you have any questions about these Terms, please <Link legacyBehavior href="/page-contact"><a>contact us</a></Link>.</p>
+                                            <p>If you have any questions about these Terms, please <Link legacyBehavior href="/pages/bulks"><a>contact us</a></Link>.</p>
                                         </div>
                                     </div>
                                 </div>

@@ -9,6 +9,7 @@ import Link from "next/link";
 import axios from 'axios';
 import {server} from "../../server";
 import {assetServer} from "../../assetServer";
+import Router from 'next/router';
 
 const SingleProduct = ({
                            product,
@@ -159,7 +160,12 @@ const SingleProduct = ({
                             </div>
                             {product.group === "1" ? (
                                 <div className="add-cart">
-                                    <a className="fi-rs-users mr-5">Group</a>
+                                    <a
+                                        className="fi-rs-users mr-5"
+                                        onClick={() => Router.push('/page-account')}
+                                    >
+                                        Group
+                                    </a>
                                 </div>
                             ) : (
                                 <div className="add-cart">

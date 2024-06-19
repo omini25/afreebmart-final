@@ -8,6 +8,8 @@ import {toast} from "react-toastify";
 import { useRouter } from "next/router";
 import {Modal} from "react-responsive-modal";
 import AddAddress from "../components/ecommerce/AddAddress";
+import CreateGroup from "../components/ecommerce/CreateGroup";
+import JoinGroup from "../components/ecommerce/JoinGroup";
 
 function Account() {
     const [shouldRedirect, setShouldRedirect] = useState(false);
@@ -16,6 +18,8 @@ function Account() {
     const [userInfo, setUserInfo] = useState({});
     const dispatch = useDispatch();
     const userId = userInfo.user ? userInfo.user.id : null;
+    const [showCreateGroupModal, setShowCreateGroupModal] = useState(false);
+    const [showJoinGroupModal, setShowJoinGroupModal] = useState(false);
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currentAddress, setCurrentAddress] = useState(null);
@@ -111,7 +115,6 @@ function Account() {
         fetchAddress();
     }, [userInfo]);
 
-    console.log(address);
 
 
     const handleSubmit = async (event) => {
@@ -178,6 +181,37 @@ function Account() {
         }
     };
 
+    const [groupDetails, setGroupDetails] = useState([]);
+
+    useEffect(() => {
+        const fetchGroupDetails = async () => {
+            if (userInfo.user) {
+                try {
+                    const response = await axios.get(`${server}/user/group/${userInfo.user.id}`);
+                    setGroupDetails(response.data.groups);
+                } catch (error) {
+                    console.error('Failed to fetch group details:', error);
+                }
+            }
+        };
+
+        fetchGroupDetails();
+    }, [userInfo]);
+
+    const deleteGroup = async (groupId) => {
+        try {
+            await axios.delete(`${server}/user/group/${groupId}`);
+            toast.success('Group deleted successfully');
+            // Refresh group details after deletion
+            fetchGroupDetails();
+        } catch (error) {
+            console.error('Failed to delete group:', error);
+            toast.error('Failed to delete group');
+        }
+    };
+
+    console.log(groupDetails)
+
     return (
         <>
             <Layout parent="Home" sub="Pages" subChild="Account">
@@ -237,8 +271,26 @@ function Account() {
                                                     </div>
                                                     <div className="card-body">
                                                         <p>
-                                                            From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br />
-                                                            manage your <a href="#">addresses</a> and <a href="#">edit your password and account details.</a>
+                                                            From your account dashboard. you can easily check &amp; view your
+                                                            <span
+                                                            style={{color: 'blue', cursor: 'pointer'}}
+                                                            onClick={() => handleOnClick(2)}
+                                                            >
+                                                                recent orders
+                                                            </span>,
+                                                            <br/>
+                                                            manage your
+                                                            <span
+                                                                style={{color: 'blue', cursor: 'pointer'}}
+                                                                onClick={() => handleOnClick(4)}
+                                                            >
+                                                                addresses
+                                                            </span> and <span
+                                                                style={{color: 'blue', cursor: 'pointer'}}
+                                                                onClick={() => handleOnClick(5)}
+                                                            >
+                                                            edit your password and account details.
+                                                            </span>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -257,7 +309,7 @@ function Account() {
                                                                     <th>Date</th>
                                                                     <th>Status</th>
                                                                     <th>Total</th>
-                                                                    <th>Actions</th>
+                                                                    {/*<th>Actions</th>*/}
                                                                 </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -267,8 +319,73 @@ function Account() {
                                                                         <td>{new Date(order.created_at).toLocaleDateString()}</td>
                                                                         <td>{order.status}</td>
                                                                         <td>${order.total_price} for {order.quantity} item(s)</td>
-                                                                        <td><a href="#"
-                                                                               className="btn-small d-block">View</a>
+                                                                        {/*<td><a href="#"*/}
+                                                                        {/*       className="btn-small d-block">View</a>*/}
+                                                                        {/*</td>*/}
+                                                                    </tr>
+                                                                ))}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div className={activeIndex === 6 ? "tab-pane fade active show" : "tab-pane fade "} >
+                                                <div className="card">
+                                                    <div className="card-header">
+                                                        <div
+                                                            className="card-header d-flex justify-content-between align-items-center">
+                                                            <h3 className="mb-0">Your Bulk Orders</h3>
+                                                            <div>
+                                                                <button className="btn btn mr-3"
+                                                                        onClick={() => setShowCreateGroupModal(true)}>Create
+                                                                    a group
+                                                                </button>
+                                                                <CreateGroup show={showCreateGroupModal}
+                                                                             onClose={() => setShowCreateGroupModal(false)}/>
+                                                                <button className="btn btn mr-5"
+                                                                        onClick={() => setShowJoinGroupModal(true)}>Join
+                                                                    a group
+                                                                </button>
+                                                                <JoinGroup show={showJoinGroupModal}
+                                                                           onClose={() => setShowJoinGroupModal(false)}/>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <div className="table-responsive">
+                                                            <table className="table">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Group Name</th>
+                                                                    <th>Group Id</th>
+                                                                    <th>Product</th>
+                                                                    <th>Role</th>
+                                                                    <th>Status</th>
+                                                                    <th>Users</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {groupDetails && Array.isArray(groupDetails) && groupDetails.map((group, index) => (
+                                                                    <tr key={index}>
+                                                                        <td>{group.name}</td>
+                                                                        <td>#{group.group_id}</td>
+                                                                        <td>{group.product_name}</td>
+                                                                        <td>{group.role}</td>
+                                                                        <td>{group.status}</td>
+                                                                        <td>{group.users_count}</td>
+                                                                        <td>
+                                                                            <button
+                                                                                className="btn-small d-block text-danger"
+                                                                                onClick={() => deleteGroup(group.group_id)}
+                                                                            >
+                                                                                Delete
+                                                                            </button>
                                                                         </td>
                                                                     </tr>
                                                                 ))}
