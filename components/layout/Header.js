@@ -202,37 +202,136 @@ const Header = ({
                                                     </span>
                                                 </a>
                                             </Link>
-                                            <div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown"
-                                                 style={{width: '350px'}}>
+                                            <div className="cart-dropdown-wrap cart-dropdown-hm2">
                                                 <ul>
-                                                    <>
-                                                        {cart && cart.length > 0 ? (
-                                                            cart.map((item, index) => (
-                                                                <li key={index} style={{
-                                                                    display: 'flex',
-                                                                    alignItems: 'center',
-                                                                    marginBottom: '10px'
-                                                                }}>
-                                                                    <div className="image product-thumbnail"
-                                                                         style={{marginRight: '10px'}}>
-                                                                        <img
-                                                                            src={`${assetServer}/images/products/${item.image}`}
-                                                                            alt="#"
-                                                                            style={{width: '50px', height: '50px'}}
-                                                                        />
-                                                                    </div>
-                                                                    <div className="mr-10">
-                                                                        <p style={{margin: '0'}}>{item.product_name}</p>
-                                                                        <p style={{margin: '0'}}>Quantity: {item.quantity}</p>
-                                                                        <p style={{margin: '0'}}>Price: {item.price}</p>
-                                                                    </div>
-                                                                </li>
-                                                            ))
-                                                        ) : (
-                                                            <p>Your cart is empty</p>
-                                                        )}
-                                                    </>
+                                                    {cart && cart.length > 0 ? (
+                                                        cart.map((item, index) => (
+                                                            <li key={index}>
+                                                                <div className="shopping-cart-img">
+                                                                    <Link legacyBehavior href="#">
+                                                                        <a>
+                                                                            <img
+                                                                                src={`${assetServer}/images/products/${item.image}`}
+                                                                                alt={item.product_name}
+                                                                            />
+                                                                        </a>
+                                                                    </Link>
+                                                                </div>
+                                                                <div className="shopping-cart-title">
+                                                                    <h4>
+                                                                        <Link legacyBehavior href="/shop-grid-right">
+                                                                            <a>
+                                                                                {item.product_name}
+                                                                            </a>
+                                                                        </Link>
+                                                                    </h4>
+                                                                    <h3>
+                                                                        <span>{item.quantity} × </span>
+                                                                        ${item.price}
+                                                                    </h3>
+                                                                </div>
+                                                                <div className="shopping-cart-delete">
+                                                                    <Link legacyBehavior href="/#">
+                                                                        <a>
+                                                                            <i className="fi-rs-cross-small"></i>
+                                                                        </a>
+                                                                    </Link>
+                                                                </div>
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <p>Your cart is empty</p>
+                                                    )}
                                                 </ul>
+                                                <div className="shopping-cart-button">
+                                                    <Link legacyBehavior href="/shop-cart">
+                                                        <a>View cart</a>
+                                                    </Link>
+                                                    <Link legacyBehavior href="/shop-checkout">
+                                                        <a>Checkout</a>
+                                                    </Link>
+                                                </div>
+                                            </div>
+                                            <div className="cart-dropdown-wrap cart-dropdown-hm2">
+                                                <ul>
+                                                    <li>
+                                                        <div className="shopping-cart-img">
+                                                            <Link legacyBehavior href="/shop-grid-right">
+                                                                <a>
+                                                                <img
+                                                                        alt="Evara"
+                                                                        src="/assets/imgs/shop/thumbnail-3.jpg"
+                                                                    />
+                                                                </a>
+                                                            </Link>
+                                                        </div>
+                                                        <div className="shopping-cart-title">
+                                                            <h4>
+                                                                <Link legacyBehavior href="/shop-grid-right">
+                                                                    <a>
+                                                                        Plain
+                                                                        Striola
+                                                                        Shirts
+                                                                    </a>
+                                                                </Link>
+                                                            </h4>
+                                                            <h3>
+                                                                <span>1 × </span>
+                                                                $800.00
+                                                            </h3>
+                                                        </div>
+
+                                                    </li>
+                                                    <li>
+                                                        <div className="shopping-cart-img">
+                                                            <Link legacyBehavior href="/shop-grid-right">
+                                                                <a>
+                                                                    <img
+                                                                        alt="Evara"
+                                                                        src="/assets/imgs/shop/thumbnail-4.jpg"
+                                                                    />
+                                                                </a>
+                                                            </Link>
+                                                        </div>
+                                                        <div className="shopping-cart-title">
+                                                            <h4>
+                                                                <Link legacyBehavior href="/shop-grid-right">
+                                                                    <a>
+                                                                        Macbook Pro
+                                                                        2022
+                                                                    </a>
+                                                                </Link>
+                                                            </h4>
+                                                            <h3>
+                                                                <span>1 × </span>
+                                                                $3500.00
+                                                            </h3>
+                                                        </div>
+                                                        <div className="shopping-cart-delete">
+                                                            <Link legacyBehavior href="/#">
+                                                                <a>
+                                                                    <i className="fi-rs-cross-small"></i>
+                                                                </a>
+                                                            </Link>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <div className="shopping-cart-footer">
+                                                    <div className="shopping-cart-total">
+                                                        <h4>
+                                                            Total
+                                                            <span>$383.00</span>
+                                                        </h4>
+                                                    </div>
+                                                    <div className="shopping-cart-button">
+                                                        <Link legacyBehavior href="/shop-cart">
+                                                            <a>View cart</a>
+                                                        </Link>
+                                                        <Link legacyBehavior href="/shop-checkout">
+                                                            <a>Checkout</a>
+                                                        </Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
@@ -255,7 +354,7 @@ const Header = ({
                                                         <>
                                                             <li>
                                                                 <Link legacyBehavior href="/page-login">
-                                                                <a>Login</a>
+                                                                    <a>Login</a>
                                                                 </Link>
                                                             </li>
                                                             <li>
@@ -322,7 +421,7 @@ const Header = ({
                     }
                 >
                     <div className="container">
-                        <div className="header-wrap header-space-between position-relative">
+                    <div className="header-wrap header-space-between position-relative">
                             <div className="logo logo-width-1 d-block d-lg-none">
                                 <Link legacyBehavior href="/">
                                     <a>
