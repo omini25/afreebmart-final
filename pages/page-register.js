@@ -68,7 +68,9 @@ function Signup() {
                                         <div className="padding_eight_all bg-white">
                                             <div className="heading_s1">
                                                 <h1 className="mb-5">Signup</h1>
-                                                <p className="mb-30">Have an account? <Link legacyBehavior href="/page-login"><a>Login here</a></Link></p>
+                                                <p className="mb-30">Have an account? <Link legacyBehavior
+                                                                                            href="/page-login"><a>Login
+                                                    here</a></Link></p>
                                             </div>
                                             <form onSubmit={handleSignup} method="post">
                                                 <div className="form-group">
@@ -136,12 +138,30 @@ function Signup() {
                                                     </button>
                                                 </div>
                                                 <div className="heading_s1">
-                                                    <p className="mb-30">By clicking signup you agree to our <Link legacyBehavior href="/page-terms"><a>Terms</a></Link>
-                                                    and <Link legacyBehavior href="/page-privacy-policy"><a>Privacy Policy</a></Link>
+                                                    <p className="mb-30">By clicking signup you agree to our <Link
+                                                        legacyBehavior href="/page-terms"><a>Terms</a></Link>
+                                                        and <Link legacyBehavior href="/page-privacy-policy"><a>Privacy
+                                                            Policy</a></Link>
                                                     </p>
                                                 </div>
                                                 {error && <p>{error}</p>}
                                             </form>
+                                            <div className="">
+                                                <div className="card-login mt-10">
+                                                    <a href="#" className="social-login facebook-login">
+                                                        <img src="/assets/imgs/theme/icons/logo-facebook.svg" alt=""/>
+                                                        <span>Continue with Facebook</span>
+                                                    </a>
+                                                    <a href="#" className="social-login google-login">
+                                                        <img src="/assets/imgs/theme/icons/logo-google.svg" alt=""/>
+                                                        <span>Continue with Google</span>
+                                                    </a>
+                                                    <a href="#" className="social-login apple-login">
+                                                        <img src="/assets/imgs/theme/icons/logo-apple.svg" alt=""/>
+                                                        <span>Continue with Apple</span>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

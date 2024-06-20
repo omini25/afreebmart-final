@@ -41,7 +41,9 @@ function Login() {
                                         <div className="padding_eight_all bg-white">
                                             <div className="heading_s1">
                                                 <h1 className="mb-5">Login</h1>
-                                                <p className="mb-30">Don't have an account? <Link legacyBehavior href="/page-register"><a>Create here</a></Link></p>
+                                                <p className="mb-30">Don't have an account? <Link legacyBehavior
+                                                                                                  href="/page-register"><a>Create
+                                                    here</a></Link></p>
                                             </div>
                                             <form onSubmit={handleLogin}>
                                                 <div className="form-group">
@@ -77,19 +79,40 @@ function Login() {
                                                 <div className="login_footer form-group mb-50">
                                                     <div className="chek-form">
                                                         <div className="custome-checkbox">
-                                                            <input className="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1" value="" />
-                                                            <label className="form-check-label" htmlFor="exampleCheckbox1"><span>Remember me</span></label>
+                                                            <input className="form-check-input" type="checkbox"
+                                                                   name="checkbox" id="exampleCheckbox1" value=""/>
+                                                            <label className="form-check-label"
+                                                                   htmlFor="exampleCheckbox1"><span>Remember me</span></label>
                                                         </div>
                                                     </div>
                                                     <a className="text-muted" href="#">Forgot password?</a>
                                                 </div>
                                                 <div className="form-group">
-                                                    <button type="submit" className="btn btn-heading btn-block hover-up" name="login">Log in</button>
+                                                    <button type="submit" className="btn btn-heading btn-block hover-up"
+                                                            name="login">Log in
+                                                    </button>
                                                 </div>
                                             </form>
+                                            <div className="">
+                                                <div className="card-login mt-10">
+                                                    <a href="#" className="social-login facebook-login">
+                                                        <img src="/assets/imgs/theme/icons/logo-facebook.svg" alt=""/>
+                                                        <span>Continue with Facebook</span>
+                                                    </a>
+                                                    <a href="#" className="social-login google-login">
+                                                        <img src="/assets/imgs/theme/icons/logo-google.svg" alt=""/>
+                                                        <span>Continue with Google</span>
+                                                    </a>
+                                                    <a href="#" className="social-login apple-login">
+                                                        <img src="/assets/imgs/theme/icons/logo-apple.svg" alt=""/>
+                                                        <span>Continue with Apple</span>
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
