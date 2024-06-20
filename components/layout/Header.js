@@ -6,6 +6,9 @@ import CategoryProduct3 from "../ecommerce/Filter/CategoryProduct3";
 import Search from "../ecommerce/Search";
 import {toast} from "react-toastify";
 import { useRouter } from "next/router";
+import { Popover, OverlayTrigger } from 'react-bootstrap';
+import {assetServer} from "../../assetServer";
+
 
 const Header = ({
                     totalCartItems,
@@ -18,6 +21,13 @@ const Header = ({
     const [isToggled, setToggled] = useState(false);
     const [scroll, setScroll] = useState(0);
     // const dispatch = useDispatch();
+    const [cart, setCart] = useState([]);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setCart(JSON.parse(localStorage.getItem('dokani_cart')) || []);
+        }
+    }, []);
 
     const handleNavigation = () => {
         router.push({
@@ -51,6 +61,36 @@ const Header = ({
             },
         });
     };
+
+    // let cart = localStorage.getItem('cart');
+    // cart = cart ? JSON.parse(cart) : [];
+
+    // let cart;
+    // if (typeof window !== 'undefined') {
+    //     cart = JSON.parse(localStorage.getItem('dokani_cart')) || [];
+    // }
+
+
+
+    const popover = (
+        <Popover id="cart-popover">
+            <Popover.Title as="h3">Cart Items</Popover.Title>
+            <Popover.Content>
+                {cart && cart.length > 0 ? (
+                    cart.map((item, index) => (
+                        <div key={index}>
+                            <p>{item.product_name}</p>
+                            <p>Quantity: {item.quantity}</p>
+                            <p>Price: {item.price}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>Your cart is empty</p>
+                )}
+            </Popover.Content>
+        </Popover>
+    );
+
 
 
 
@@ -141,17 +181,20 @@ const Header = ({
                                             </Link>
                                         </div>
                                         <div className="header-action-icon-2">
-                                            <Link legacyBehavior href="/shop-cart">
-                                                <a className="mini-cart-icon">
-                                                    <img
-                                                        alt="Evara"
-                                                        src="/assets/imgs/theme/icons/icon-cart.svg"
-                                                    />
-                                                    <span className="pro-count blue">
-                                                        {totalCartItems}
-                                                    </span>
-                                                </a>
-                                            </Link>
+
+                                            <OverlayTrigger trigger="hover" placement="bottom" overlay={popover}>
+                                                <Link legacyBehavior href="/shop-cart">
+                                                    <a className="mini-cart-icon">
+                                                        <img
+                                                            alt="Evara"
+                                                            src="/assets/imgs/theme/icons/icon-cart.svg"
+                                                        />
+                                                        <span className="pro-count blue">
+                                                            {totalCartItems}
+                                                        </span>
+                                                    </a>
+                                                </Link>
+                                            </OverlayTrigger>
                                             <Link legacyBehavior href="/shop-cart">
                                                 <a>
                                                     <span className="lable">
@@ -159,6 +202,38 @@ const Header = ({
                                                     </span>
                                                 </a>
                                             </Link>
+                                            <div className="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown"
+                                                 style={{width: '350px'}}>
+                                                <ul>
+                                                    <>
+                                                        {cart && cart.length > 0 ? (
+                                                            cart.map((item, index) => (
+                                                                <li key={index} style={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    marginBottom: '10px'
+                                                                }}>
+                                                                    <div className="image product-thumbnail"
+                                                                         style={{marginRight: '10px'}}>
+                                                                        <img
+                                                                            src={`${assetServer}/images/products/${item.image}`}
+                                                                            alt="#"
+                                                                            style={{width: '50px', height: '50px'}}
+                                                                        />
+                                                                    </div>
+                                                                    <div className="mr-10">
+                                                                        <p style={{margin: '0'}}>{item.product_name}</p>
+                                                                        <p style={{margin: '0'}}>Quantity: {item.quantity}</p>
+                                                                        <p style={{margin: '0'}}>Price: {item.price}</p>
+                                                                    </div>
+                                                                </li>
+                                                            ))
+                                                        ) : (
+                                                            <p>Your cart is empty</p>
+                                                        )}
+                                                    </>
+                                                </ul>
+                                            </div>
                                         </div>
 
                                         <div className="header-action-icon-2">
@@ -180,7 +255,7 @@ const Header = ({
                                                         <>
                                                             <li>
                                                                 <Link legacyBehavior href="/page-login">
-                                                                    <a>Login</a>
+                                                                <a>Login</a>
                                                                 </Link>
                                                             </li>
                                                             <li>

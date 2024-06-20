@@ -12,12 +12,12 @@ import Layout from "./../components/layout/Layout";
 import CategorySlider from "./../components/sliders/Category";
 import Intro1 from "./../components/sliders/Intro1";
 import Link from "next/link";
+import { useMediaQuery } from 'react-responsive';
 
 
 
 export default function Home() {
-
-    console.log(React.version);
+    const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
 
     return (
         <>
@@ -80,15 +80,44 @@ export default function Home() {
                 <section className="product-tabs section-padding position-relative">
                     <div className="container">
                         <div className="col-lg-12">
-                            <CategoryTab />
+                            <CategoryTab/>
+                        </div>
+
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh'}}>
+                            <Link legacyBehavior href="/products">
+                                <a style={{
+                                    padding: '10px 20px',
+                                    backgroundColor: '#6de669',
+                                    color: '#fff',
+                                    borderRadius: '5px',
+                                    textDecoration: 'none'
+                                }}>
+                                    Go to Products
+                                </a>
+                            </Link>
                         </div>
                     </div>
                 </section>
 
                 <section className="section-padding pb-5">
                     <div className="container">
-                        <FetchTabSlider />
+                        <FetchTabSlider/>
                     </div>
+                    {isMobile && (
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '10vh'}}>
+                            <Link legacyBehavior href="/products-bulk">
+                                <a style={{
+                                    padding: '10px 20px',
+                                    backgroundColor: '#6de669',
+                                    color: '#fff',
+                                    borderRadius: '5px',
+                                    textDecoration: 'none'
+                                }}>
+                                    Go to Products
+                                </a>
+                            </Link>
+                        </div>
+                    )}
                 </section>
 
                 {/*<section className="section-padding pb-5">*/}
