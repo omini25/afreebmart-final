@@ -102,53 +102,61 @@ const Cart = ({
 
     const stripePromise = loadStripe('pk_test_51K4bVzCT7v0Ax3ZCQUKpDk4gTPZ6UuWcJlMpNULOujrGRhsEL4IPAdeZ7KwDXIFEcJ5sLTxm3r2DMCUaQYWbLl2W00W13HDVPl');
 
-    // const handleCheckoutSession = async (event) => {
-    //     try {
-    //         event.preventDefault();
-    //
-    //         const productDetails = cartItems.map((item) => ({
-    //             name: item.product_name,
-    //             totalPrice: item.price,
-    //             quantity: item.quantity,
-    //         }));
-    //
-    //         const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    //
-    //         const stripe = await stripePromise;
-    //
-    //         const response = await axios.post(`${server}/create-checkout-session`, {
-    //             productDetails,
-    //             user_id: userInfo.user.id,
-    //         });
-    //
-    //         const { id: sessionId } = response.data;
-    //
-    //         if (sessionId) {
-    //             const result = await stripe.redirectToCheckout({
-    //                 sessionId,
-    //             });
-    //
-    //             if (result.error) {
-    //                 console.error('Stripe error:', result.error.message);
-    //                 toast.error('An error occurred during the payment process.');
-    //             } else {
-    //                 // Post cart details to the API
-    //                 await axios.post('/api/cart-details', {
-    //                     cartItems,
-    //                     userId: userInfo.user.id,
-    //                 });
-    //
-    //                 toast.success('Order placed successfully!');
-    //                 navigate('/order-successful');
-    //             }
-    //         } else {
-    //             toast.error('Failed to create a checkout session.');
-    //         }
-    //     } catch (error) {
-    //         console.error('An error occurred:', error);
-    //         toast.error('An error occurred during the payment process.');
-    //     }
-    // };
+    const handleCheckoutSession = async (event) => {
+        try {
+            event.preventDefault();
+
+            const productDetails = cartItems.map((item) => ({
+                name: item.product_name,
+                totalPrice: item.price,
+                quantity: item.quantity,
+            }));
+
+            const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
+            const stripe = await stripePromise;
+
+            const response = await axios.post(`${server}/create-checkout-session`, {
+                productDetails,
+                user_id: userInfo.user.id,
+            });
+
+            const { id: sessionId } = response.data;
+            console.log(sessionId);
+
+            if (sessionId) {
+                const result = await stripe.redirectToCheckout({
+                    sessionId,
+                });
+
+                if (result.error) {
+                    console.error('Stripe error:', result.error.message);
+                    toast.error('An error occurred during the payment process.');
+                } else {
+                    // Post cart details to the API
+                    await axios.post(`${server}/orders/${userInfo.user.id}`, {
+                        cartItems,
+                        userId: userInfo.user.id,
+                    })
+                        .then(() => {
+                            console.log('Order created successfully');
+                            toast.success('Order placed successfully!');
+                            clearCart(); // Assuming you have a clearCart function
+                            navigate('/order-successful');
+                        })
+                        .catch((error) => {
+                            console.error('Error creating order:', error);
+                            toast.error('An error occurred while placing the order.');
+                        });
+                }
+            } else {
+                toast.error('Failed to create a checkout session.');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+            toast.error('An error occurred during the payment process.');
+        }
+    };
 
     return (
         <>
@@ -425,16 +433,16 @@ const Cart = ({
                                             <h5>Total Payment: ${(price() + 5.99).toFixed(2)}</h5>
                                         </div>
                                     </div>
-                                    {/*<button*/}
-                                    {/*    className="btn btn-fill-out btn-block mt-30"*/}
-                                    {/*    onClick={handleCheckoutSession}*/}
-                                    {/*>*/}
-                                    {/*    Place Order*/}
-                                    {/*</button>*/}
+                                    <button
+                                        className="btn btn-fill-out btn-block mt-30"
+                                        onClick={handleCheckoutSession}
+                                    >
+                                        Place Order
+                                    </button>
 
-                                    <Elements stripe={stripePromise}>
-                                        <CheckoutForm cartItems={cartItems} />
-                                    </Elements>
+                                    {/*<Elements stripe={stripePromise}>*/}
+                                    {/*    <CheckoutForm cartItems={cartItems} />*/}
+                                    {/*</Elements>*/}
 
                                 </div>
                             </div>
