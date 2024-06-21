@@ -37,7 +37,7 @@ const Intro1 = () => {
                                 left: 0,
                                 height: '100%',
                                 width: '100%',
-                                backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
+                                // backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
                             }}
                         />
                         <div className="slider-content">
@@ -46,7 +46,7 @@ const Intro1 = () => {
                                 <br/>
                                 and Fresh Groceries
                             </h1>
-                            <p className="mb-65 text-white">
+                            <p className="mb-65">
                                 Better ingredients, better food, and beverages, at low prices
                             </p>
                             <div className="form-subcriber d-flex justify-content-center">
@@ -73,7 +73,7 @@ const Intro1 = () => {
                                 left: 0,
                                 height: '100%',
                                 width: '100%',
-                                backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
+                                // backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
                             }}
                         />
                         <div className="slider-content">
@@ -82,7 +82,7 @@ const Intro1 = () => {
                                 <br/>
                                 Best Deals
                             </h1>
-                            <p className="mb-65 text-white">
+                            <p className="mb-65">
                                 Enjoy amazing deals on your favorite products
                             </p>
                             <div className="form-subcriber d-flex justify-content-center">
@@ -109,17 +109,17 @@ const Intro1 = () => {
                                 left: 0,
                                 height: '100%',
                                 width: '100%',
-                                backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
+                                // backgroundColor: 'rgba(0, 0, 0, 0.3)' // Change the color and opacity as needed
                             }}
                         />
                         <div className="slider-content">
                             <h1 className="display-2 mb-40" style={{color: '#6de768'}}>
-                                Fresh Vegetables
+                                Dairy Delights
                                 <br/>
-                                Big discount
+                                Delivered Fast
                             </h1>
-                            <p className="mb-65 text-white">
-                                Save up to 50% off on your first order
+                            <p className="mb-65">
+                                Enjoy amazing deals on your favorite products
                             </p>
                             <div className="form-subcriber d-flex justify-content-center">
                                 <Link to="/products" href={`/products`} className="btn">
