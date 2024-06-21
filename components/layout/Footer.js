@@ -244,19 +244,19 @@ const Footer = () => {
                                         <a href="/page-about">About Us</a>
                                     </li>
                                     <li>
-                                        <a href="#">Delivery Options</a>
+                                        <a href="/delivery-options">Delivery Options</a>
                                     </li>
                                     <li>
-                                        <a href="#">Privacy Policy</a>
+                                        <a href="/page-privacy-policy">Privacy Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#">Terms &amp; Conditions</a>
+                                        <a href="/page-terms">Terms &amp; Conditions</a>
                                     </li>
                                     <li>
-                                        <a href="#">Contact Us</a>
+                                        <a href="/page-contact">Contact Us</a>
                                     </li>
                                     <li>
-                                        <a href="#">Careers</a>
+                                        <a href="/careers">Careers</a>
                                     </li>
                                 </ul>
                             </div>
@@ -280,25 +280,25 @@ const Footer = () => {
                                 <h4 className="widget-title ">Support</h4>
                                 <ul className="footer-list  mb-sm-5 mb-md-0">
                                     <li>
-                                        <a href="#">Sell on Afreebmart</a>
+                                        <a href="/vendor-guide">Sell on Afreebmart</a>
                                     </li>
                                     <li>
-                                        <a href="#">Logistics Partner</a>
+                                        <a href="/logistics-partner">Logistics Partner</a>
                                     </li>
                                     <li>
-                                        <a href="#">Compensation</a>
+                                        <a href="/compensation">Compensation</a>
                                     </li>
                                     <li>
-                                        <a href="#">Return Policy</a>
+                                        <a href="/return-policy">Return Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#">Freshness Policy</a>
+                                        <a href="/freshness-policy">Freshness Policy</a>
                                     </li>
                                     <li>
-                                        <a href="#">Make a Report</a>
+                                        <a href="/make-a-report">Make a Report</a>
                                     </li>
                                     <li>
-                                        <a href="#">FAQ</a>
+                                        <a href="/faq">FAQ</a>
                                     </li>
                                 </ul>
                             </div>

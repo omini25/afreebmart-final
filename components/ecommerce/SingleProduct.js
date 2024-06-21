@@ -36,6 +36,28 @@ const SingleProduct = ({
         addToWishlist(product);
         toast("Added to Wishlist !");
     };
+
+    const [isInGroup, setIsInGroup] = useState(false);
+    const userId = localStorage.getItem('user.id');
+
+    useEffect(() => {
+        const checkGroup = async () => {
+            try {
+                const response = await axios.get(`https://your-api-url/groups/${product.id}`);
+                if (response.data) {
+                    setIsInGroup(true);
+                }
+            } catch (error) {
+                console.error('Failed to check group:', error);
+            }
+        };
+
+        if (userId) {
+            checkGroup();
+        }
+    }, [userId, product.id]);
+
+
     return (
         <>
 
@@ -144,13 +166,26 @@ const SingleProduct = ({
                             <span className="old-price">{product.oldPrice && `$ ${product.oldPrice}`}</span>
                         </div>
                         {product.group === "1" ? (
-                            <div className="add-cart">
-                                <a
-                                    className="fi-rs-users mr-5"
-                                    onClick={() => Router.push('/page-account')}
-                                >
-                                    Group
-                                </a>
+                            <div>
+                                {userId && isInGroup ? (
+                                    <div className="add-cart">
+                                        <a
+                                            className="add"
+                                            onClick={(e) => handleCart(product)}
+                                        >
+                                            <i className="fi-rs-shopping-cart mr-5"></i> Add
+                                        </a>
+                                    </div>
+                                ) : (
+                                    <div className="add-cart">
+                                        <a
+                                            className="fi-rs-users mr-5"
+                                            onClick={() => Router.push('/page-account')}
+                                        >
+                                            Group
+                                        </a>
+                                    </div>
+                                )}
                             </div>
                         ) : (
                             <div className="add-cart">

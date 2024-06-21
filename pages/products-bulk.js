@@ -39,8 +39,6 @@ const Products = ({ products, productFilters, fetchProduct }) => {
         fetchProducts();
     }, []);
 
-    console.log(data);
-
     let Router = useRouter(),
         searchTerm = Router.query.search,
         showLimit = 12,
@@ -101,41 +99,35 @@ const Products = ({ products, productFilters, fetchProduct }) => {
             <Layout noBreadcrumb="d-none">
                 {/*<Breadcrumb2/>*/}
                 <div className="col-xl-10 col-lg-12 m-auto">
-                    <button onClick={() => setShowSection(!showSection)}>
+                    <button onClick={() => setShowSection(!showSection)} className="btn btn-sm font-weight-bold text-white mt-20 border-radius-5 btn-shadow-brand hover-up">
                         <i className="down-icon">What is Bulk Product</i>
                     </button>
                     {showSection && (
                         <section className="row align-items-end mb-50">
                             <div className="col-lg-4 mb-lg-0 mb-md-5 mb-sm-5">
-                                <h4 className="mb-20 text-brand">How can help you ?</h4>
-                                <h1 className="mb-30">Let us know how we can help you</h1>
-                                <p className="mb-20">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus
-                                    leo.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus,
-                                    luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                <h4 className="mb-20 text-brand">Guide to Group Bulk Purchasing on Afreebmart</h4>
+                                <h3 className="mb-30">Save Money by Sharing Purchases!</h3>
+                                <p className="mb-20">Find a Deal:</p>
+                                <p>Browse our Group Purchase section for shared buying options.</p>
                             </div>
                             <div className="col-lg-8">
                                 <div className="row">
                                     <div className="col-lg-6 mb-4">
-                                        <h5 className="mb-20">01. Visit Feedback</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                        <h5 className="mb-20">01. Join or Create a Group</h5>
+                                        <p>Select a product and either join an existing group or create your own.</p>
                                     </div>
                                     <div className="col-lg-6 mb-4">
-                                        <h5 className="mb-20">02. Employer Services</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                        <h5 className="mb-20">02. Invite Others:</h5>
+                                        <p>Share the product link or the group id to fill the required slots faster.</p>
                                     </div>
                                     <div className="col-lg-6 mb-lg-0 mb-4">
-                                        <h5 className="mb-20 text-brand">03. Billing Inquiries</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                        <h5 className="mb-20 text-brand">03. Complete the Purchase:</h5>
+                                        <p>Pay once the group is complete and receive your product.</p>
                                     </div>
                                     <div className="col-lg-6">
-                                        <h5 className="mb-20">04.General Inquiries</h5>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+                                        <h5 className="mb-20">* Benefits</h5>
+                                        <p>- Cost Savings: Share the cost with others.</p>
+                                        <br /><p>- Easy Collaboration: Join or create groups for the best deals.</p>
                                     </div>
                                 </div>
                             </div>
