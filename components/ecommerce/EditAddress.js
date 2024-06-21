@@ -46,7 +46,7 @@ const EditAddress = ({ address }) => {
 
     return (
         <>
-            <button className="btn btn-fill-out btn-block mt-20" onClick={openModal}>Edit</button>
+            <button className="btn btn-sm font-weight-bold text-white mt-1 border-radius-5 btn-shadow-brand hover-up" onClick={openModal}>Edit</button>
             <Modal
                 open={modalOpen}
                 onClose={closeModal}
@@ -57,7 +57,7 @@ const EditAddress = ({ address }) => {
                     },
                 }}
             >
-                <h2>Edit Address</h2>
+                <h2 className="p-4">Edit Address</h2>
                 <form className="p-4" onSubmit={handleEditAddress}>
                     <div className="form-group">
                         <div className="custom_select">

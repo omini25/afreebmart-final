@@ -149,7 +149,7 @@ const Header = ({
                                     <a>
                                         <img
                                             src="assets/afreemart-logo.png"
-                                            alt="logo"
+                                            alt="Afreebmart"
                                         />
                                     </a>
                                 </Link>

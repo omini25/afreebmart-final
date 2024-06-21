@@ -18,6 +18,7 @@ const RelatedSlider = ({ vendorId }) => {
                 const response = await axios.get(`${server}/products`);
                 const vendorProducts = response.data.products.filter(product => product.vendor_id === vendorId);
                 setProduct(vendorProducts);
+                console.log(response.data.products)
             } catch (error) {
                 console.error('Failed to fetch product:', error);
             }
@@ -26,10 +27,14 @@ const RelatedSlider = ({ vendorId }) => {
         fetchProduct();
     }, [vendorId]);
 
+    console.log(product)
+
+    console.log(vendorId)
+
     return (
         <>
             <Swiper
-                slidesPerView={4}
+                slidesPerView={3}
                 spaceBetween={30}
 
                 navigation={{

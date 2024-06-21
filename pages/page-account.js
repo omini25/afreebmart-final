@@ -182,6 +182,20 @@ function Account() {
         }
     };
 
+    const deleteAddress = async (addressId) => {
+        try {
+            await axios.delete(`${server}/user/${userInfo.user.id}/address/${addressId}`);
+            toast.success('Address deleted successfully');
+            // Refresh addresses after deletion
+            window.location.reload();
+            fetchAddress();
+        } catch (error) {
+            console.error('Failed to delete address:', error);
+            toast.error('Failed to delete address');
+        }
+    };
+
+
     const [groupDetails, setGroupDetails] = useState([]);
 
     useEffect(() => {
@@ -214,7 +228,7 @@ function Account() {
     return (
         <>
             <Layout parent="Home" sub="Pages" subChild="Account">
-                <div className="page-content pt-150 pb-150">
+                <div className="page-content pt-100 pb-150">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-10 m-auto">
@@ -261,8 +275,8 @@ function Account() {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div className="col-md-9">
-                                    <div className="tab-content account dashboard-content pl-50">
+                                    <div className="col-lg-9">
+                                        <div className="tab-content account dashboard-content pl-50">
                                             <div className={activeIndex === 1 ? "tab-pane fade active show" : "tab-pane fade "} >
                                                 <div className="card">
                                                     <div className="card-header">
@@ -275,15 +289,15 @@ function Account() {
                                                             style={{color: '#69e265', cursor: 'pointer'}}
                                                             onClick={() => handleOnClick(2)}
                                                             >
-                                                                 recent orders
+                                                                 {" recent orders"}
                                                             </span>,
                                                             <br/>
-                                                             manage your
+                                                             manage your,
                                                             <span
                                                                 style={{color: '#69e265', cursor: 'pointer'}}
                                                                 onClick={() => handleOnClick(4)}
                                                             >
-                                                                addresses
+                                                                {" addresses"}
                                                             </span> and <span
                                                                 style={{color: '#69e265', cursor: 'pointer'}}
                                                                 onClick={() => handleOnClick(5)}
@@ -339,13 +353,13 @@ function Account() {
                                                             className="card-header d-flex justify-content-between align-items-center">
                                                             <h3 className="mb-0">Your Bulk Orders</h3>
                                                             <div>
-                                                                <button className="btn btn mr-3"
+                                                                <button className="btn btn-sm font-weight-bold text-white mt-5 border-radius-5 btn-shadow-brand hover-up"
                                                                         onClick={() => setShowCreateGroupModal(true)}>Create
                                                                     a group
                                                                 </button>
                                                                 <CreateGroup show={showCreateGroupModal}
                                                                              onClose={() => setShowCreateGroupModal(false)}/>
-                                                                <button className="btn btn mr-5"
+                                                                <button className="btn btn-sm font-weight-bold text-white mt-5 border-radius-5 btn-shadow-brand hover-up"
                                                                         onClick={() => setShowJoinGroupModal(true)}>Join
                                                                     a group
                                                                 </button>
@@ -380,7 +394,7 @@ function Account() {
                                                                         <td>{group.users_count}</td>
                                                                         <td>
                                                                             <button
-                                                                                className="btn-small d-block text-danger"
+                                                                                className="btn btn-sm font-weight-bold mt-5 border-radius-5 btn-shadow-brand hover-up text-danger"
                                                                                 onClick={() => deleteGroup(group.group_id)}
                                                                             >
                                                                                 Delete
@@ -396,9 +410,9 @@ function Account() {
                                             </div>
 
 
-                                        <div
-                                            className={activeIndex === 3 ? "tab-pane fade active show" : "tab-pane fade "}>
-                                        <div className="card">
+                                            <div
+                                                className={activeIndex === 3 ? "tab-pane fade active show" : "tab-pane fade "}>
+                                                <div className="card">
                                                     <div className="card-header">
                                                         <h3 className="mb-0">Orders tracking</h3>
                                                     </div>
@@ -422,88 +436,113 @@ function Account() {
                                                     </div>
                                                 </div>
                                             </div>
+
+
                                             <div className={activeIndex === 4 ? "tab-pane fade active show" : "tab-pane fade "} >
                                                 <div className="row">
-                                                    <div className="col-lg-6">
+                                                    <div className="col-lg-12">
                                                         <div className="card mb-3 mb-lg-0">
                                                             <div className="card-header d-flex justify-content-between">
                                                                 <h3 className="mb-0 mr-5">Address</h3>
-                                                                <AddAddress userId={userId} refreshAddresses={fetchAddress}/>
+                                                                <AddAddress userId={userId}
+                                                                            refreshAddresses={fetchAddress}/>
                                                             </div>
                                                             <div className="card-body">
-                                                                <div>
+                                                                <table>
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Street</th>
+                                                                        <th>City</th>
+                                                                        <th>State</th>
+                                                                        <th>Country</th>
+                                                                        <th>Zip Code</th>
+                                                                        <th>Actions</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
                                                                     {address && address.map((addr, index) => (
-                                                                        <div key={index}>
-                                                                            <address className="mt-20">
-                                                                                {addr.street}, <br />{addr.city}, <br />{addr.state}, <br />{addr.country}, <br />{addr.zip_code}
-                                                                            </address>
-                                                                            {/*<button className="btn btn-fill-out btn-block mt-20" onClick={() => openModal(addr)}>Edit</button>*/}
-
-                                                                            <EditAddress address={addr} />
-                                                                        </div>
+                                                                        <tr key={index}>
+                                                                            <td>{addr.street}</td>
+                                                                            <td>{addr.city}</td>
+                                                                            <td>{addr.state}</td>
+                                                                            <td>{addr.country}</td>
+                                                                            <td>{addr.zip_code}</td>
+                                                                            <td>
+                                                                                <EditAddress address={addr}/>
+                                                                            </td>
+                                                                            <td>
+                                                                                <button
+                                                                                    className="btn btn-sm font-weight-bold mt-5 border-radius-5 btn-shadow-brand hover-up text-danger"
+                                                                                    onClick={() => deleteAddress(addr.id)}
+                                                                                >
+                                                                                    Delete
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
                                                                     ))}
-                                                                </div>
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        <div
-                                            className={activeIndex === 5 ? "tab-pane fade active show" : "tab-pane fade "}>
+                                            <div
+                                                className={activeIndex === 5 ? "tab-pane fade active show" : "tab-pane fade "}>
                                             <div className="card">
-                                                <div className="card-header">
-                                                    <h5>Account Details</h5>
-                                                </div>
-                                                <div className="card-body">
-                                                    <p>Already have an account? <Link legacyBehavior href="/page-login"><a>Log
-                                                        in instead!</a></Link></p>
-                                                    <form onSubmit={handleSubmit} name="enq">
-                                                        <div className="row">
-                                                            <div className="form-group col-md-6">
-                                                                <label>Name <span className="required">*</span></label>
-                                                                <input
-                                                                    required=""
-                                                                    className="form-control"
-                                                                    name="name"
-                                                                    type="text"
-                                                                    placeholder={userInfo.user ? userInfo.user.name : ''}
-                                                                />
-                                                            </div>
-                                                            <div className="form-group col-md-6">
-                                                                    <label>Phone Number <span className="required">*</span></label>
-                                                                    <input required=""
-                                                                           className="form-control"
-                                                                           name="phone"
-                                                                           placeholder={userInfo.user ? userInfo.user.phone : ''}
+                                                    <div className="card-header">
+                                                        <h5>Account Details</h5>
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <p>Already have an account? <Link legacyBehavior href="/page-login"><a>Log
+                                                            in instead!</a></Link></p>
+                                                        <form onSubmit={handleSubmit} name="enq">
+                                                            <div className="row">
+                                                                <div className="form-group col-md-6">
+                                                                    <label>Name <span className="required">*</span></label>
+                                                                    <input
+                                                                        required=""
+                                                                        className="form-control"
+                                                                        name="name"
+                                                                        type="text"
+                                                                        placeholder={userInfo.user ? userInfo.user.name : ''}
                                                                     />
                                                                 </div>
+                                                                <div className="form-group col-md-6">
+                                                                        <label>Phone Number <span className="required">*</span></label>
+                                                                        <input required=""
+                                                                               className="form-control"
+                                                                               name="phone"
+                                                                               placeholder={userInfo.user ? userInfo.user.phone : ''}
+                                                                        />
+                                                                    </div>
 
-                                                                <div className="form-group col-md-12">
-                                                                    <label>Email Address <span className="required">*</span></label>
-                                                                    <input required=""
-                                                                           className="form-control"
-                                                                           name="email"
-                                                                           type="email"
-                                                                            placeholder={userInfo.user ? userInfo.user.email : ''}
-                                                                    />
+                                                                    <div className="form-group col-md-12">
+                                                                        <label>Email Address <span className="required">*</span></label>
+                                                                        <input required=""
+                                                                               className="form-control"
+                                                                               name="email"
+                                                                               type="email"
+                                                                                placeholder={userInfo.user ? userInfo.user.email : ''}
+                                                                        />
+                                                                    </div>
+                                                                    {/*<div className="form-group col-md-12">*/}
+                                                                    {/*    <label>Current Password <span className="required">*</span></label>*/}
+                                                                    {/*    <input required="" className="form-control" name="password" type="password" />*/}
+                                                                    {/*</div>*/}
+                                                                    <div className="form-group col-md-12">
+                                                                        <label>New Password <span className="required">*</span></label>
+                                                                        <input required="" className="form-control" name="npassword" type="password" />
+                                                                    </div>
+                                                                    <div className="form-group col-md-12">
+                                                                        <label>Confirm Password <span className="required">*</span></label>
+                                                                        <input required="" className="form-control" name="cpassword" type="password" />
+                                                                    </div>
+                                                                    <div className="col-md-12">
+                                                                        <button type="submit" className="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
+                                                                    </div>
                                                                 </div>
-                                                                {/*<div className="form-group col-md-12">*/}
-                                                                {/*    <label>Current Password <span className="required">*</span></label>*/}
-                                                                {/*    <input required="" className="form-control" name="password" type="password" />*/}
-                                                                {/*</div>*/}
-                                                                <div className="form-group col-md-12">
-                                                                    <label>New Password <span className="required">*</span></label>
-                                                                    <input required="" className="form-control" name="npassword" type="password" />
-                                                                </div>
-                                                                <div className="form-group col-md-12">
-                                                                    <label>Confirm Password <span className="required">*</span></label>
-                                                                    <input required="" className="form-control" name="cpassword" type="password" />
-                                                                </div>
-                                                                <div className="col-md-12">
-                                                                    <button type="submit" className="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                            </form>
                                                     </div>
                                                 </div>
                                             </div>

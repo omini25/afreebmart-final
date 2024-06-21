@@ -28,13 +28,25 @@ function Login() {
     return (
         <>
             {/*<Layout parent="Home" sub="Pages" subChild="Login & Register">*/}
-            <div className="page-content pt-150 pb-150">
+            <div className="page-content pt-50 pb-50">
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-8 col-lg-10 col-md-12 m-auto">
-                            <div className="row">
+
+                            <div className="col-lg-6 col-md-8">
+                                <Link legacyBehavior href="/">
+                                    <a>
+                                        <img src="assets/afreemart-logo.png" alt=""
+                                             style={{width: '50%', height: 'auto'}}/>
+                                    </a>
+                                </Link>
+                            </div>
+
+                            <div className="row mt-30">
                                 <div className="col-lg-6 pr-30 d-none d-lg-block">
-                                    <img className="border-radius-15" src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+                                    <img className="border-radius-15"
+                                         src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                         alt=""/>
                                 </div>
                                 <div className="col-lg-6 col-md-8">
                                     <div className="login_wrap widget-taber-content background-white">
@@ -64,18 +76,7 @@ function Login() {
                                                         required
                                                     />
                                                 </div>
-                                                {/*<div className="login_footer form-group">*/}
-                                                {/*    <div className="chek-form">*/}
-                                                {/*        <input type="text" required="" name="email"*/}
-                                                {/*               placeholder="Security code *"/>*/}
-                                                {/*    </div>*/}
-                                                {/*    <span className="security-code">*/}
-                                                {/*        <b className="text-new">8</b>*/}
-                                                {/*        <b className="text-hot">6</b>*/}
-                                                {/*        <b className="text-sale">7</b>*/}
-                                                {/*        <b className="text-best">5</b>*/}
-                                                {/*    </span>*/}
-                                                {/*</div>*/}
+
                                                 <div className="login_footer form-group mb-50">
                                                     <div className="chek-form">
                                                         <div className="custome-checkbox">
@@ -85,7 +86,8 @@ function Login() {
                                                                    htmlFor="exampleCheckbox1"><span>Remember me</span></label>
                                                         </div>
                                                     </div>
-                                                    <a className="text-muted" href="#">Forgot password?</a>
+                                                    <a className="text-muted" href="/reset-password-email">Forgot
+                                                        password?</a>
                                                 </div>
                                                 <div className="form-group">
                                                     <button type="submit" className="btn btn-heading btn-block hover-up"
@@ -94,17 +96,20 @@ function Login() {
                                                 </div>
                                             </form>
                                             <div className="">
-                                                <div className="card-login mt-10">
+                                                <div className="card-login mt-20 pt-10">
                                                     <a href="#" className="social-login facebook-login">
-                                                        <img src="/assets/imgs/theme/icons/logo-facebook.svg" alt=""/>
+                                                        <img src="/assets/imgs/theme/icons/logo-facebook.svg" alt=""
+                                                             style={{width: '20px', height: '20px'}}/>
                                                         <span>Continue with Facebook</span>
                                                     </a>
                                                     <a href="#" className="social-login google-login">
-                                                        <img src="/assets/imgs/theme/icons/logo-google.svg" alt=""/>
+                                                        <img src="/assets/imgs/theme/icons/logo-google.svg" alt=""
+                                                             style={{width: '20px', height: '20px'}}/>
                                                         <span>Continue with Google</span>
                                                     </a>
                                                     <a href="#" className="social-login apple-login">
-                                                        <img src="/assets/imgs/theme/icons/logo-apple.svg" alt=""/>
+                                                        <img src="/assets/imgs/theme/icons/logo-apple.svg" alt=""
+                                                             style={{width: '20px', height: '20px'}}/>
                                                         <span>Continue with Apple</span>
                                                     </a>
                                                 </div>

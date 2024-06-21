@@ -52,7 +52,7 @@ function AddAddress({ userId, refreshAddresses }) {
     return (
         <>
             <div className="">
-                <button className="submit submit-auto-width" onClick={openModal}>Add Address</button>
+                <button className="btn btn-sm font-weight-bold text-white mt-10 border-radius-5 btn-shadow-brand hover-up" onClick={openModal}>Add Address</button>
 
                 <Modal
                     open={modalOpen}

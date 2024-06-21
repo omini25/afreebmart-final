@@ -175,7 +175,7 @@ const Cart = ({
                             <div className="col-lg-7">
                                 <div className="row mb-50">
 
-                                    <div className="col-lg-6">
+                                    <div className="col-lg-8">
                                         <form
                                             method="post"
                                             className="apply-coupon"
