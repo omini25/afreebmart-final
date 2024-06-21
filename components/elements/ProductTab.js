@@ -58,8 +58,12 @@ const ProductTab = ({product}) => {
                             <hr className="wp-block-separator is-style-dots" />
                             <h4 className="mt-30">Packaging & Delivery</h4>
                             <hr className="wp-block-separator is-style-wide" />
-                            <p>Less lion goodness that euphemistically robin expeditiously bluebird smugly scratched far while thus cackled sheepishly rigid after due one assenting regarding censorious while occasional or this more crane went more as this less much amid overhung anathematic because much held one exuberantly sheep goodness so where rat wry well concomitantly.</p>
-                            <p>Scallop or far crud plain remarkably far by thus far iguana lewd precociously and and less rattlesnake contrary caustic wow this near alas and next and pled the yikes articulate about as less cackled dalmatian in much less well jeering for the thanks blindly sentimental whimpered less across objectively fanciful grimaced wildly some wow and rose jeepers outgrew lugubrious luridly irrationally attractively dachshund.</p>
+                            <p>We ensure your fresh food items arrive in perfect condition using eco-friendly packaging materials:</p>
+                            <p>* Temperature Control: Insulated boxes and ice packs keep perishables fresh.
+                                <br />* Secure Wrapping: Items are carefully wrapped to prevent damage.
+                                <br />* Sustainable Materials: Our packaging is recyclable and biodegradable.
+                            </p>
+                            <p>Learn more about our delivery options <a>here</a></p>
                         </div>
                     </div>
                     <div className={activeIndex === 2 ? "tab-pane fade show active" : "tab-pane fade"} id="Additional-info">
