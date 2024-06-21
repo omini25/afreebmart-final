@@ -21,40 +21,70 @@ const CheckoutForm = ({ cartItems }) => {
             return;
         }
 
-        const { sessionId } = router.query;
+        const cardElement = elements.getElement(CardElement);
 
-        if (sessionId) {
-            const result = await stripe.redirectToCheckout({
-                sessionId,
-            });
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: cardElement,
+        });
 
-            if (result.error) {
-                console.error('Stripe error:', result.error.message);
-                toast.error('An error occurred during the payment process.');
-            } else {
-                // Post cart details to the API
-                await axios.post(`${server}/orders/${userInfo.user.id}`, {
-                    cartItems,
-                    userId: userInfo.user.id,
+        if (error) {
+            setError(error.message);
+        } else {
+            try {
+                // const paymentMethodId = paymentMethod.id;
+                const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+                // const productDetails = cartItems.map((item) => ({
+                //     name: item.product_name,
+                //     totalPrice: item.price,
+                //     quantity: item.quantity,
+                // }));
+
+                // Prepare the product details to be sent to your backend
+                const productDetails = cartItems.reduce((acc, item) => {
+                    acc[item.product_name] = {
+                        name: item.product_name,
+                        totalPrice: item.price,
+                        quantity: item.quantity,
+                    };
+                    return acc;
+                }, {});
+
+                console.log(productDetails);
+
+                // Send the product details to your backend
+                const response = await axios(`${server}/orders/${userInfo.user.id}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    data: productDetails,
                 });
 
-                toast.success('Order placed successfully!');
-                navigate('/order-successful');
+                if (response.ok) {
+                    // Payment successful, handle the response as needed
+                    console.log('Payment successful');
+                    clearCart();
+                    toast.success('Payment successful');
+                } else {
+                    // Handle payment error
+                    console.error('Payment failed:', response.data);
+                }
+            } catch (error) {
+                console.error('Error:', error);
             }
-        } else {
-            toast.error('No session ID provided.');
         }
     };
 
-    // return (
-    //     <form onSubmit={handleSubmit}>
-    //         <CardElement />
-    //         {error && <div>{error}</div>}
-    //         <button type="submit" disabled={!stripe}>
-    //             Place Order
-    //         </button>
-    //     </form>
-    // );
+    return (
+        <form onSubmit={handleSubmit}>
+            <CardElement />
+            {error && <div>{error}</div>}
+            <button type="submit" disabled={!stripe}>
+                Place Order
+            </button>
+        </form>
+    );
 };
 
 export default CheckoutForm

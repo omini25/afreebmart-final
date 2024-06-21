@@ -129,26 +129,22 @@ const Cart = ({
                     sessionId,
                 });
 
-                if (result.error) {
-                    console.error('Stripe error:', result.error.message);
-                    toast.error('An error occurred during the payment process.');
-                } else {
-                    // Post cart details to the API
-                    await axios.post(`${server}/orders/${userInfo.user.id}`, {
-                        cartItems,
-                        userId: userInfo.user.id,
+                await axios.post(`${server}/orders/${userInfo.user.id}`, {
+                    cartItems,
+                    userId: userInfo.user.id,
+                })
+                    .then((response) => {
+                        console.log('Response:', response);
+                        console.log('Order created successfully');
+                        toast.success('Order placed successfully!');
+                        clearCart(); // Assuming you have a clearCart function
+                        navigate('/order-successful');
                     })
-                        .then(() => {
-                            console.log('Order created successfully');
-                            toast.success('Order placed successfully!');
-                            clearCart(); // Assuming you have a clearCart function
-                            navigate('/order-successful');
-                        })
-                        .catch((error) => {
-                            console.error('Error creating order:', error);
-                            toast.error('An error occurred while placing the order.');
-                        });
-                }
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        console.error('Error creating order:', error);
+                        toast.error('An error occurred while placing the order.');
+                    });
             } else {
                 toast.error('Failed to create a checkout session.');
             }
