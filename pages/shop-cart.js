@@ -11,6 +11,7 @@ import {
     openCart
 } from "../redux/action/cart";
 import {assetServer} from "../assetServer";
+import {useMediaQuery} from "react-responsive";
 
 const Cart = ({
     openCart,
@@ -22,6 +23,7 @@ const Cart = ({
     deleteFromCart,
     clearCart,
 }) => {
+    const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
     const price = () => {
         let price = 0;
         if (cartItems) {
@@ -75,16 +77,19 @@ const Cart = ({
                                         //     )}}
                                     >
                                         <thead>
-                                        <tr className="main-heading">
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Unit Price</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Subtotal</th>
-                                            <th scope="col" className="end">
-                                                Remove
-                                            </th>
-                                        </tr>
+                                        {!isMobile &&
+                                            <tr className="main-heading">
+                                                <th scope="col">Product</th>
+                                                <th scope="col">Unit Price</th>
+                                                <th scope="col">Quantity</th>
+                                                <th scope="col">Subtotal</th>
+                                                <th scope="col" className="end">
+                                                    Remove
+                                                </th>
+                                            </tr>
+                                        }
                                         </thead>
+
                                         <tbody>
                                         {cartItems && cartItems.map((item, i) => (
                                             <tr key={i}>
@@ -100,25 +105,7 @@ const Cart = ({
                                                         </Link>
                                                     </h6>
                                                 </td>
-
-                                                {/*<td className="product-des product-name">*/}
-
-                                                {/*    /!*<div className="product-rate-cover">*!/*/}
-                                                {/*    /!*    <div className="product-rate d-inline-block">*!/*/}
-                                                {/*    /!*        <div*!/*/}
-                                                {/*    /!*            className="product-rating"*!/*/}
-                                                {/*    /!*            style={{*!/*/}
-                                                {/*    /!*                width: "90%",*!/*/}
-                                                {/*    /!*            }}*!/*/}
-                                                {/*    /!*        ></div>*!/*/}
-                                                {/*    /!*    </div>*!/*/}
-                                                {/*    /!*    <span className="font-small ml-5 text-muted">*!/*/}
-                                                {/*    /!*        {" "}*!/*/}
-                                                {/*    /!*        (4.0)*!/*/}
-                                                {/*    /!*    </span>*!/*/}
-                                                {/*    /!*</div>*!/*/}
-                                                {/*</td>*/}
-                                                <td
+                                                {!isMobile && <td
                                                     className="price"
                                                     data-title="Price"
                                                 >
@@ -126,6 +113,8 @@ const Cart = ({
                                                         ${item.price}
                                                     </h4>
                                                 </td>
+                                                }
+
                                                 <td
                                                     className="text-center detail-info"
                                                     data-title="Stock"

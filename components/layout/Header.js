@@ -103,30 +103,30 @@ const Header = ({
         });
     });
 
-    // const logout = () => {
-    // // Check if code is running in the browser
-    //     if (typeof window !== 'undefined') {
-    //         // Remove userInfo and isLoggedIn from localStorage
-    //         localStorage.removeItem('userInfo');
-    //         localStorage.removeItem('isLoggedIn');
-    //     }
-    //
-    //     // Dispatch logout action to update the state
-    //     dispatch({ type: 'USER_LOGOUT' });
-    //
-    //     // Set shouldRedirect to true
-    //     setShouldRedirect(true);
-    //     toast('Logout successful!')
-    // };
+    const logout = () => {
+    // Check if code is running in the browser
+        if (typeof window !== 'undefined') {
+            // Remove userInfo and isLoggedIn from localStorage
+            localStorage.removeItem('userInfo');
+            localStorage.removeItem('isLoggedIn');
+        }
 
-    // useEffect(() => {
-    //     if (shouldRedirect) {
-    //         // Redirect to home page
-    //         router.push('/');
-    //         // Reset shouldRedirect
-    //         setShouldRedirect(false);
-    //     }
-    // }, [shouldRedirect]);
+        // Dispatch logout action to update the state
+        dispatch({ type: 'USER_LOGOUT' });
+
+        // Set shouldRedirect to true
+        setShouldRedirect(true);
+        toast('Logout successful!')
+    };
+
+    useEffect(() => {
+        if (shouldRedirect) {
+            // Redirect to home page
+            router.push('/');
+            // Reset shouldRedirect
+            setShouldRedirect(false);
+        }
+    }, [shouldRedirect]);
 
     const handleToggle = () => setToggled(!isToggled);
 
@@ -324,12 +324,12 @@ const Header = ({
                                                                     Setting
                                                                 </a></Link>
                                                             </li>
-                                                            {/*<li>*/}
-                                                            {/*    <a onClick={logout}>*/}
-                                                            {/*        <i className="fi fi-rs-sign-out mr-10"></i>*/}
-                                                            {/*        Sign out*/}
-                                                            {/*    </a>*/}
-                                                            {/*</li>*/}
+                                                            <li>
+                                                                <a onClick={logout}>
+                                                                    <i className="fi fi-rs-sign-out mr-10"></i>
+                                                                    Sign out
+                                                                </a>
+                                                            </li>
                                                         </>
                                                     )}
                                                 </ul>
@@ -349,7 +349,7 @@ const Header = ({
                     }
                 >
                     <div className="container">
-                    <div className="header-wrap header-space-between position-relative">
+                        <div className="header-wrap header-space-between position-relative">
                             <div className="logo logo-width-1 d-block d-lg-none">
                                 <Link legacyBehavior href="/">
                                     <a>
@@ -383,44 +383,12 @@ const Header = ({
                                             <CategoryProduct2/>
                                             {/*<CategoryProduct3/>*/}
                                         </div>
-                                        {/*<div*/}
-                                        {/*    className="more_slide_open"*/}
-                                        {/*    style={{ display: "none" }}*/}
-                                        {/*>*/}
-                                        {/*    <div className="d-flex categori-dropdown-inner">*/}
-                                        {/*        <ul>*/}
-                                        {/*            <li>*/}
-                                        {/*                <Link legacyBehavior href=""><a>*/}
-                                        {/*                    onClick={handleNavigation}*/}
-                                        {/*                    {" "}*/}
-                                        {/*                    <img*/}
-                                        {/*                        src="/assets/imgs/theme/icons/icon-1.svg"*/}
-                                        {/*                        alt=""*/}
-                                        {/*                    />*/}
-                                        {/*                    Fresh Foods*/}
-                                        {/*                </a></Link>*/}
-                                        {/*            </li>*/}
-                                        {/*            */}
-                                        {/*        </ul>*/}
-                                        {/*        <ul className="end">*/}
-                                        {/*            <li>*/}
-                                        {/*                <Link legacyBehavior href="/products"><a>*/}
-                                        {/*                    {" "}*/}
-                                        {/*                    <img*/}
-                                        {/*                        src="/assets/imgs/theme/icons/icon-3.svg"*/}
-                                        {/*                        alt=""*/}
-                                        {/*                    />*/}
-                                        {/*                    Wines & Drinks*/}
-                                        {/*                </a></Link>*/}
-                                        {/*            </li>*/}
-                                        {/*            */}
-                                        {/*        </ul>*/}
-                                        {/*    </div>*/}
-                                        {/*</div>*/}
+
 
                                     </div>
                                 </div>
-                                <div className="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block justify-content-center  font-heading">
+                                <div
+                                    className="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block justify-content-center  font-heading">
                                     <nav>
                                         <ul>
 
@@ -604,11 +572,14 @@ const Header = ({
                                             <li>
                                                 <a href="#">Vendors <i className="fi-rs-angle-down"></i></a>
                                                 <ul className="sub-menu">
-                                                    <li><Link legacyBehavior href="/vendors-list"><a>Vendors</a></Link></li>
+                                                    <li><Link legacyBehavior href="/vendors-list"><a>Vendors</a></Link>
+                                                    </li>
 
                                                     {/*<li><Link legacyBehavior href="/vendor-dashboard"><a>Vendor Dashboard</a></Link></li>*/}
-                                                    <li><Link legacyBehavior href="/vendor-guide"><a>Vendor Guide</a></Link></li>
-                                                    <li><Link legacyBehavior href="/"><a>Become A Vendor </a></Link></li>
+                                                    <li><Link legacyBehavior href="/vendor-guide"><a>Vendor
+                                                        Guide</a></Link></li>
+                                                    <li><Link legacyBehavior href="/"><a>Become A Vendor </a></Link>
+                                                    </li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -626,6 +597,15 @@ const Header = ({
                                 {/*</p>*/}
                             </div>
 
+
+                            <div className="header-action-icon-2 d-block d-lg-none"
+                                 onClick={toggleClick}>
+                                <div className="burger-icon burger-icon-white">
+                                    <span className="burger-icon-top"></span>
+                                    <span className="burger-icon-mid"></span>
+                                    <span className="burger-icon-bottom"></span>
+                                </div>
+                            </div>
 
 
                             <div className="header-action-right d-block d-lg-none">
@@ -743,16 +723,16 @@ const Header = ({
                                         {/*    </div>*/}
                                         {/*</div>*/}
                                     </div>
-                                    <div className="header-action-icon-2 d-block d-lg-none">
-                                        <div
-                                            className="burger-icon burger-icon-white"
-                                            onClick={toggleClick}
-                                        >
-                                            <span className="burger-icon-top"></span>
-                                            <span className="burger-icon-mid"></span>
-                                            <span className="burger-icon-bottom"></span>
-                                        </div>
-                                    </div>
+                                    {/*<div className="header-action-icon-2 d-block d-lg-none">*/}
+                                    {/*    <div*/}
+                                    {/*        className="burger-icon burger-icon-white"*/}
+                                    {/*        onClick={toggleClick}*/}
+                                    {/*    >*/}
+                                    {/*        <span className="burger-icon-top"></span>*/}
+                                    {/*        <span className="burger-icon-mid"></span>*/}
+                                    {/*        <span className="burger-icon-bottom"></span>*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>

@@ -39,6 +39,13 @@ const MobileMenu = ({ isToggled, toggleClick }) => {
         });
     };
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const removeSearchTerm = () => {
+        // Update your state here to clear the search term
+        setSearchTerm('');
+    };
+
     const selectCategory = (e, subCategory) => {
         e.preventDefault();
         removeSearchTerm();
@@ -330,17 +337,17 @@ const MobileMenu = ({ isToggled, toggleClick }) => {
                                 {isLoggedIn ? (
                                     <ul>
                                         <li>
-                                            <Link legacyBehavior  href="/account">
+                                            <Link legacyBehavior  href="/page-account">
                                                 <a>Account</a>
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link legacyBehavior href="/orders">
+                                            <Link legacyBehavior href="/page-account">
                                                 <a>Orders</a>
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link legacyBehavior href="/profile">
+                                            <Link legacyBehavior href="/page-account">
                                                 <a>Profile</a>
                                             </Link>
                                         </li>
